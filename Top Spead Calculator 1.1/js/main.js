@@ -4,7 +4,9 @@
   const calc = document.getElementById('calc');
   const calcBtn = document.getElementById('calc-btn');
   const resetBtn = document.getElementById('reset-btn');
+  // const whiteLoading1 = document.getElementById('loading1');
   const whiteLoading2 = document.getElementById('white-loading2');
+  // const loadingImg1 = document.getElementById('loading-img1');
   const loadingImg2 = document.getElementById('loading-img2');
   const table = document.getElementById('table');
   const tableResult1 = document.getElementById('table-result1');
@@ -356,11 +358,27 @@
 
   //読み込みボタン
   const load = document.getElementById('load');
+  // load.disabled = true;
   load.classList.add('is-inactive');
   document.addEventListener('DOMContentLoaded', () => {
+    // loadBtnActive();
+    // dataDeleteBtnActive();
     loadSavedData();
   });
 
+  // function loadBtnActive() {
+  //   const keys = Object.keys(localStorage);
+  //   const load = document.getElementById('load');
+  //   load.classList.remove('is-active', 'is-inactive');
+
+  //   if (keys.length > 0) {
+  //     load.disabled = false;
+  //     load.classList.add('is-active');
+  //   } else if (keys.length < 0) {
+  //     load.disabled = true;
+  //     load.classList.add('is-inactive');
+  //   }
+  // }
 
   load.addEventListener('click', () => {
     const savedDataSelect = document.getElementById('savedData');
@@ -377,9 +395,12 @@
 
   });
 
+  // loadSavedData();
 
   //削除ボタン
   const dataDelete = document.getElementById('delete');
+  // dataDelete.disabled = true;
+  // dataDelete.classList.add('is-inactive');
 
   dataDelete.addEventListener('click', () => {
     const savedDataSelect = document.getElementById('savedData');
@@ -391,10 +412,28 @@
       return
     } else if (window.confirm(`"${selectKey}"を削除しますか？`)) {
       localStorage.removeItem(selectKey);
+      // loadBtnActive();
     } 
 
     loadSavedData()
+    // dataDeleteBtnActive();
   });
+
+
+  // function dataDeleteBtnActive() {
+  //   const keys = Object.keys(localStorage);
+  //   const dataDelete = document.getElementById('delete');
+  //   dataDelete.classList.remove('is-active', 'is-inactive');
+
+  //   if (keys.length > 0) {
+  //     dataDelete.disabled = false;
+  //     dataDelete.classList.add('is-active');
+  //   } else {
+  //     dataDelete.disabled = true;
+  //     dataDelete.classList.add('is-inactive');
+  //   }
+  //   loadSavedData();
+  // }
 
 
   //最高速度の計算
