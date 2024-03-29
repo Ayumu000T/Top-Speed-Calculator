@@ -1,0 +1,1246 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "koruri";
+  src: url("../font/Koruri-Bold.ttf") format("truetype");
+}
+body {
+  margin: 0;
+  background: #50a3ab;
+  color: #1d313c;
+  font-family: "koruri";
+  background-image: linear-gradient(90deg, transparent 39px, #1d313c 40px), linear-gradient(0deg, transparent 39px, #1d313c 40px);
+  background-size: 40px 40px;
+}
+
+img {
+  pointer-events: none;
+}
+
+.wrapper {
+  width: 900px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin: 0;
+  /* font-size: 1.4em; */
+  font-weight: normal;
+}
+
+h3 {
+  margin: 0;
+  font-weight: normal;
+}
+
+p {
+  font-weight: normal;
+  margin: 0;
+}
+
+/* ----------タイトルバー----------- */
+.title-bar {
+  border-top: 24px solid #1d313c;
+}
+.title-bar .sprocket1 {
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+.title-bar .sprocket2 {
+  position: absolute;
+  top: 0;
+  left: 26px;
+}
+.title-bar .sprocket3 {
+  position: absolute;
+  top: 0;
+  left: 48px;
+}
+.title-bar .sprocket4 {
+  position: absolute;
+  top: 0;
+  left: 880px;
+}
+
+.sprocket4-ex {
+  position: absolute;
+  top: 0;
+  left: 530px;
+}
+
+.sprocket4-hel {
+  position: absolute;
+  top: 0;
+  left: 285px;
+}
+
+/* ----------ロゴ----------- */
+.logo {
+  margin: 32px auto;
+  background: #fadac1;
+  width: 900px;
+  border: 8px solid #1d313c;
+  border-radius: 16px;
+  box-shadow: #222 16px 16px;
+  position: relative;
+}
+.logo h1 {
+  margin: 0;
+}
+.logo h1 img {
+  display: block;
+  margin: 32px auto;
+  background: #fff;
+  border: 8px solid #1d313c;
+  padding: 16px 0;
+}
+
+/* フッター */
+small {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* ----------説明----------- */
+.explain {
+  margin: 70px auto;
+  background: #fadac1;
+  width: 555px;
+  border: 6px solid #1d313c;
+  border-radius: 18px;
+  box-shadow: #222 16px 16px;
+  position: relative;
+  left: -167px;
+}
+@media (max-width: 576px) {
+  .explain {
+    width: 600px;
+    left: -145px;
+  }
+}
+@media (max-width: 576px) {
+  .explain .fukidashi-1 {
+    width: 600px;
+    height: 300px;
+  }
+}
+.explain .title-bar .ex1-h2 {
+  color: #fff;
+  position: absolute;
+  top: 44px;
+  left: 48px;
+}
+@media (max-width: 576px) {
+  .explain .title-bar .ex1-h2 {
+    font-size: 1.8em;
+  }
+}
+.explain .title-bar .ex1-p {
+  font-size: 0.93em;
+  position: absolute;
+  top: 100px;
+  left: 50px;
+}
+@media (max-width: 576px) {
+  .explain .title-bar .ex1-p {
+    font-size: 1.04em;
+    left: 40px;
+    top: 110px;
+  }
+}
+
+/* ----------説明２----------- */
+.explain2 {
+  background: #fadac1;
+  width: 555px;
+  border: 6px solid #1d313c;
+  border-radius: 18px;
+  box-shadow: #222 16px 16px;
+  position: absolute;
+  top: 324px;
+  left: -6px;
+}
+@media (max-width: 576px) {
+  .explain2 {
+    width: 600px;
+    height: 330px;
+    top: 370px;
+  }
+}
+@media (max-width: 576px) {
+  .explain2 .fukidashi-2 {
+    width: 600px;
+    height: 300px;
+  }
+}
+.explain2 .title-bar .ex2-h2 {
+  color: #fff;
+  position: absolute;
+  top: 65px;
+  left: 50px;
+}
+@media (max-width: 576px) {
+  .explain2 .title-bar .ex2-h2 {
+    font-size: 1.8em;
+    margin-top: 4px;
+  }
+}
+.explain2 .title-bar ol {
+  margin: auto;
+  padding-left: 18px;
+  position: absolute;
+  top: 133px;
+  left: 45px;
+}
+@media (max-width: 576px) {
+  .explain2 .title-bar ol {
+    top: 145px;
+    left: 40px;
+  }
+}
+.explain2 .title-bar ol li {
+  font-size: 0.95em;
+}
+@media (max-width: 576px) {
+  .explain2 .title-bar ol li {
+    font-size: 1.08em;
+  }
+}
+
+/* ----------ヘルメットくん----------- */
+.helmet {
+  margin: 32px auto;
+  background: #fadac1;
+  width: 310px;
+  border: 6px solid #1d313c;
+  border-radius: 16px;
+  box-shadow: #222 16px 16px;
+  position: absolute;
+  top: 50px;
+  left: 590px;
+}
+@media (max-width: 576px) {
+  .helmet {
+    width: 260px;
+    top: 90px;
+    left: 637px;
+  }
+}
+.helmet .title-bar .helmet-back {
+  background: #fff;
+  border: 6px solid #1d313c;
+  margin: 56px 16px 32px;
+}
+.helmet .title-bar .helmet-back .fukidashi-5 {
+  position: absolute;
+  top: 45px;
+}
+.helmet .title-bar .helmet-back .icon {
+  background: #222;
+  border-radius: 50%;
+  display: block;
+  margin: 28px auto 0;
+}
+.helmet .title-bar .helmet-back .name {
+  color: #fff;
+  position: absolute;
+  top: 67px;
+  left: 46px;
+}
+.helmet .title-bar .helmet-back .helmet-id {
+  text-align: center;
+  margin: 24px 0 12px;
+}
+.helmet .title-bar .helmet-back .call-icon {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 576px) {
+  .sprocket4-hel {
+    position: absolute;
+    top: 0;
+    left: 240px;
+  }
+  .sprocket4-ex {
+    position: absolute;
+    top: 0;
+    left: 580px;
+  }
+}
+/* 数値入力部分 */
+.container {
+  width: 900px;
+  margin: 400px auto 32px;
+  background: #fadac1;
+  border-radius: 16px;
+  border: 8px solid #1d313c;
+  border-radius: 16px;
+  box-shadow: #222 16px 16px;
+  position: relative;
+}
+@media (max-width: 576px) {
+  .container {
+    margin-top: 450px;
+  }
+}
+
+.localStorage {
+  z-index: 1;
+  position: absolute;
+  top: 162px;
+  left: 440px;
+}
+@media (max-width: 576px) {
+  .localStorage {
+    left: 60px;
+  }
+}
+.localStorage select {
+  width: 185px;
+}
+@media (max-width: 576px) {
+  .localStorage select {
+    font-size: 1.2em;
+    width: 390px;
+  }
+}
+.localStorage label {
+  font-size: 0.9em;
+}
+@media (max-width: 576px) {
+  .localStorage label {
+    font-size: 1.2em;
+  }
+}
+.localStorage #load {
+  border: 2px solid #1d313c;
+  background: #e77843;
+  color: #fff;
+  transition: 0.3s;
+  cursor: pointer;
+}
+@media (max-width: 576px) {
+  .localStorage #load {
+    height: 36px;
+    width: 120px;
+    font-size: 1em;
+    margin-left: 8px;
+    height: 60px;
+    border-radius: 8px;
+  }
+}
+@media (hover: hover) {
+  .localStorage #load:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+.localStorage #load:active {
+  opacity: 0.7;
+}
+.localStorage #delete {
+  border: 2px solid #1d313c;
+  background: #c43b39;
+  color: #fff;
+  transition: 0.3s;
+  cursor: pointer;
+}
+@media (max-width: 576px) {
+  .localStorage #delete {
+    height: 36px;
+    width: 120px;
+    font-size: 1em;
+    margin-left: 8px;
+    height: 60px;
+    border-radius: 8px;
+  }
+}
+@media (hover: hover) {
+  .localStorage #delete:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+.localStorage #delete:active {
+  opacity: 0.7;
+}
+
+#calc {
+  /* ------保存しましたメッセージ------ */
+}
+#calc .fukidashi-3 {
+  display: block;
+  margin: 32px auto 0;
+  position: relative;
+}
+@media (max-width: 576px) {
+  #calc .fukidashi-3 {
+    display: none;
+  }
+}
+#calc .fukidashi-3-sp {
+  display: none;
+}
+@media (max-width: 576px) {
+  #calc .fukidashi-3-sp {
+    display: block;
+    margin: 32px auto 0;
+    position: relative;
+  }
+}
+#calc .calc-inputs h2 {
+  color: #fff;
+  position: absolute;
+  top: 80px;
+  left: 60px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs h2 {
+    font-size: 1.8em;
+  }
+}
+#calc .calc-inputs input {
+  border: 2px solid #1d313c;
+  width: 80px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs input {
+    height: 48px;
+    width: 770px;
+  }
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs input[type=text] {
+    font-size: 140%;
+  }
+}
+#calc .calc-inputs .message-hankaku {
+  position: absolute;
+  top: 210px;
+  left: 60px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .message-hankaku {
+    top: 220px;
+  }
+}
+#calc .calc-inputs .message-hankaku p {
+  font-size: 0.8em;
+}
+#calc .calc-inputs .input-moto-name {
+  font-size: 1.1em;
+  position: absolute;
+  top: 160px;
+  left: 60px;
+  display: flex;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-moto-name {
+    flex-direction: column;
+    top: 250px;
+  }
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-moto-name label {
+    font-size: 1.2em;
+  }
+}
+#calc .calc-inputs .input-moto-name input {
+  width: 280px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-moto-name input {
+    width: 770px;
+  }
+}
+#calc .calc-inputs .input-top {
+  position: absolute;
+  top: 225px;
+  left: 45px;
+  display: flex;
+  justify-content: space-between;
+  margin: 16px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top {
+    top: 350px;
+    flex-direction: column;
+  }
+}
+#calc .calc-inputs .input-top input {
+  width: 155px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top input {
+    width: 770px;
+  }
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top label {
+    font-size: 1.2em;
+  }
+}
+#calc .calc-inputs .input-top .input-rpm {
+  margin-top: 0;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-rpm {
+    flex-direction: column;
+  }
+}
+#calc .calc-inputs .input-top .input-primary {
+  margin-top: 8px;
+}
+#calc .calc-inputs .input-top .input-primary .primary {
+  margin-right: 76px;
+}
+#calc .calc-inputs .input-top .input-primary .secondary-outer {
+  margin-top: 8px;
+}
+#calc .calc-inputs .input-top .input-primary .secondary-outer .secondary {
+  margin-right: 76px;
+}
+#calc .calc-inputs .input-top .input-sprockets {
+  border: 5px solid #1d313c;
+  padding: 12px;
+  margin-top: 6px;
+  width: 365px;
+  position: relative;
+  left: 55px;
+  top: -10px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-sprockets {
+    position: static;
+    border: none;
+    padding: 0;
+    margin-top: 30px;
+  }
+}
+#calc .calc-inputs .input-top .input-sprockets input {
+  width: 100px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-sprockets input {
+    width: 770px;
+  }
+}
+#calc .calc-inputs .input-top .input-sprockets h3 {
+  display: none;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-sprockets h3 {
+    display: block;
+  }
+}
+#calc .calc-inputs .input-top .input-sprockets::before {
+  background: #fff;
+  content: "スプロケットの丁数";
+  padding: 2px 4px;
+  position: absolute;
+  top: -16px;
+  left: 110px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-sprockets::before {
+    display: none;
+  }
+}
+#calc .calc-inputs .input-top .input-sprockets p {
+  margin: 0 0 0 16px;
+  font-size: 0.7em;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-sprockets p {
+    margin: 0;
+  }
+}
+#calc .calc-inputs .input-top .input-sprockets #sprocketF,
+#calc .calc-inputs .input-top .input-sprockets #sprocketR {
+  margin-top: 8px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-sprockets #sprocketF,
+#calc .calc-inputs .input-top .input-sprockets #sprocketR {
+    margin-top: 0;
+  }
+}
+#calc .calc-inputs .input-top .input-sprockets .sprocketF {
+  margin-left: 16px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .input-top .input-sprockets .sprocketF {
+    margin: 0;
+  }
+}
+#calc .calc-inputs .tire-size {
+  margin-left: 0;
+  position: absolute;
+  top: 345px;
+  left: 60px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .tire-size {
+    top: 925px;
+  }
+}
+#calc .calc-inputs .tire-size p {
+  font-size: 0.8em;
+  margin: 8px 0;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .tire-size h2 {
+    font-size: 1.2em;
+  }
+}
+#calc .calc-inputs .tire-size .with-unit {
+  display: none;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .tire-size .with-unit {
+    display: block;
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .tire-size .without-unit {
+    display: none;
+  }
+}
+#calc .calc-inputs .tire-size .small-label {
+  font-size: 0.8em;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .tire-size .small-label {
+    display: none;
+  }
+}
+#calc .calc-inputs .ratios {
+  margin: 0;
+  position: absolute;
+  top: 470px;
+  left: 60px;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .ratios {
+    display: flex;
+    flex-direction: column;
+    top: 1285px;
+  }
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs .ratios label {
+    font-size: 1.2em;
+  }
+}
+#calc .calc-inputs .ratios p {
+  font-size: 0.9em;
+  margin: 8px 0;
+}
+#calc .calc-inputs #result-display-target1 {
+  color: #c43b39;
+  position: absolute;
+  top: 565px;
+  left: 60px;
+  opacity: 0;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs #result-display-target1 {
+    top: 1870px;
+  }
+}
+#calc .calc-inputs #result-display-target1.appear {
+  opacity: 1;
+}
+#calc .calc-inputs #result-display-target2 {
+  color: #c43b39;
+  position: absolute;
+  top: 565px;
+  left: 60px;
+  opacity: 0;
+}
+@media (max-width: 576px) {
+  #calc .calc-inputs #result-display-target2 {
+    top: 1870px;
+  }
+}
+#calc .calc-inputs #result-display-target2.appear {
+  opacity: 1;
+}
+#calc .buttons {
+  text-align: center;
+  margin-top: 6px;
+}
+#calc .buttons #calc-btn {
+  font-family: "koruri";
+  font-size: 1.2em;
+  background: #50a3ab;
+  color: #fff;
+  border: 2px solid #1d313c;
+  border-radius: 24px;
+  transition: 0.3s;
+  box-sizing: border-box;
+  width: 350px;
+  height: 50px;
+}
+@media (max-width: 576px) {
+  #calc .buttons #calc-btn {
+    height: 100px;
+    font-size: 1.6em;
+  }
+}
+@media (hover: hover) {
+  #calc .buttons #calc-btn:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+#calc .buttons #calc-btn:active {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+#calc .buttons #calc-btn.is-inactive {
+  pointer-events: none;
+  opacity: 0.7;
+}
+#calc .buttons #calc-btn.is-active {
+  pointer-events: auto;
+  cursor: pointer;
+}
+#calc .buttons .buttons-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+@media (max-width: 576px) {
+  #calc .buttons .buttons-bottom {
+    flex-direction: column;
+  }
+}
+#calc .buttons .buttons-bottom #reset-btn {
+  font-family: "koruri";
+  font-size: 1em;
+  border: 2px solid #1d313c;
+  border-radius: 24px;
+  color: #fff;
+  background: #c43b39;
+  cursor: pointer;
+  transition: 0.3s;
+  box-sizing: border-box;
+  width: 170px;
+  height: 40px;
+}
+@media (max-width: 576px) {
+  #calc .buttons .buttons-bottom #reset-btn {
+    margin: 16px auto 0;
+    height: 100px;
+    width: 350px;
+    font-size: 1.5em;
+  }
+}
+@media (hover: hover) {
+  #calc .buttons .buttons-bottom #reset-btn:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+#calc .buttons .buttons-bottom #reset-btn:active {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+#calc .buttons .buttons-bottom #save-btn {
+  font-family: "koruri";
+  font-size: 1em;
+  border: 2px solid #1d313c;
+  border-radius: 24px;
+  color: #fff;
+  background: #e77843;
+  cursor: pointer;
+  transition: 0.3s;
+  box-sizing: border-box;
+  width: 170px;
+  height: 40px;
+}
+@media (max-width: 576px) {
+  #calc .buttons .buttons-bottom #save-btn {
+    margin: 16px auto 0;
+    height: 100px;
+    width: 350px;
+    order: -1;
+    font-size: 1.5em;
+  }
+}
+@media (hover: hover) {
+  #calc .buttons .buttons-bottom #save-btn:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+#calc .buttons .buttons-bottom #save-btn:active {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+#calc #balloon {
+  position: absolute;
+  top: 790px;
+  left: 455px;
+  opacity: 0;
+  transition: 0.3s;
+  pointer-events: none;
+  z-index: 2;
+}
+@media (max-width: 576px) {
+  #calc #balloon {
+    top: 2050px;
+    left: 293px;
+  }
+}
+#calc #balloon.appear {
+  opacity: 1;
+}
+#calc #balloon .balloon {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #1d313c;
+  font-size: 1em;
+  background: #fff;
+  border: solid 3px #1d313c;
+  border-radius: 18px;
+  box-sizing: border-box;
+}
+@media (max-width: 576px) {
+  #calc #balloon .balloon {
+    padding: 30px 30px;
+    font-size: 1.3em;
+  }
+}
+#calc #balloon .balloon:before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  margin-left: -15px;
+  border: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  z-index: 2;
+}
+@media (max-width: 576px) {
+  #calc #balloon .balloon:before {
+    border-top: 10px solid #fff;
+    top: 84px;
+    border-bottom: none;
+  }
+}
+#calc #balloon .balloon:after {
+  content: "";
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  margin-left: -17px;
+  border: 12px solid transparent;
+  border-bottom: 12px solid #1d313c;
+  z-index: 1;
+}
+@media (max-width: 576px) {
+  #calc #balloon .balloon:after {
+    border-top: 12px solid #1d313c;
+    top: 88px;
+    border-bottom: none;
+  }
+}
+#calc #balloon .balloon p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+}
+
+/* --------結果ハイライト---------- */
+.highlight {
+  background: #d77676;
+  color: #fff;
+}
+
+/* --------テーブル---------- */
+#table {
+  text-align: center;
+  margin: 18px 14px 0;
+  position: relative;
+  /* --------結果１--------- */
+  /* --------結果2---------- */
+  /* -------結果選択・リセット2------ */
+}
+#table #fukidashi-result1 {
+  position: relative;
+  top: -12px;
+  left: 0;
+}
+#table #fukidashi-result2 {
+  position: relative;
+  top: -12px;
+  left: 0;
+}
+#table h2 {
+  color: #fff;
+  position: absolute;
+  top: 56px;
+  left: 45px;
+}
+@media (max-width: 576px) {
+  #table h2 {
+    font-size: 1.8em;
+    position: absolute;
+    top: 50px;
+  }
+}
+#table #table-result1 {
+  display: inline-block;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 4px solid #1d313c;
+  background: #fff;
+  margin: 32px 0 32px;
+  position: absolute;
+  top: 115px;
+  left: 40px;
+}
+@media (max-width: 576px) {
+  #table #table-result1 {
+    top: 100px;
+    font-size: 1.2em;
+  }
+}
+#table #table-result1.select {
+  border: 4px solid #d77676;
+}
+#table #table-result1 tbody tr th,
+#table #table-result1 tbody tr td {
+  width: 110px;
+  height: 30px;
+  padding: 9px 0;
+  border-bottom: 2px solid #1d313c;
+  border-right: 2px solid #1d313c;
+  font-weight: normal;
+}
+#table #table-result1 tbody tr th:last-child, #table #table-result1 tbody tr th:last-child,
+#table #table-result1 tbody tr td:last-child,
+#table #table-result1 tbody tr td:last-child {
+  border-right: none;
+}
+#table #table-result1 tbody tr:last-child th, #table #table-result1 tbody tr:last-child td {
+  border-bottom: none;
+}
+#table #result-select-message1 {
+  color: #c43b39;
+  position: absolute;
+  top: 120px;
+  left: 40px;
+}
+@media (max-width: 576px) {
+  #table #result-select-message1 {
+    top: 110px;
+  }
+}
+#table .result-buttons1 {
+  position: absolute;
+  top: 518px;
+  left: 280px;
+}
+@media (max-width: 576px) {
+  #table .result-buttons1 {
+    display: flex;
+    gap: 16px;
+    top: 495px;
+    left: 262px;
+  }
+}
+#table .result-buttons1 #result-reset1 {
+  font-family: "koruri";
+  white-space: nowrap;
+  border: 2px solid #1d313c;
+  border-radius: 26px;
+  color: #fff;
+  background: #c43b39;
+  padding: 8px 36px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+@media (max-width: 576px) {
+  #table .result-buttons1 #result-reset1 {
+    height: 70px;
+    width: 165px;
+  }
+}
+@media (hover: hover) {
+  #table .result-buttons1 #result-reset1:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+#table .result-buttons1 #result-reset1:active {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+#table .result-buttons1 #result-select1 {
+  font-family: "koruri";
+  white-space: nowrap;
+  border: 2px solid #1d313c;
+  border-radius: 26px;
+  color: #fff;
+  background: #50a3ab;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+@media (max-width: 576px) {
+  #table .result-buttons1 #result-select1 {
+    height: 70px;
+    width: 165px;
+  }
+}
+@media (hover: hover) {
+  #table .result-buttons1 #result-select1:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+#table .result-buttons1 #result-select1:active {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+#table .result-buttons1 #result-select1.is-inactive {
+  pointer-events: none;
+  opacity: 0.8;
+}
+#table #table-result2 {
+  display: inline-block;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 4px solid #1d313c;
+  background: #fff;
+  text-align: center;
+  position: absolute;
+  top: 610px;
+  left: 40px;
+}
+@media (max-width: 576px) {
+  #table #table-result2 {
+    font-size: 1.2em;
+  }
+}
+#table #table-result2.select {
+  border: 4px solid #d77676;
+}
+#table #table-result2 tbody tr th,
+#table #table-result2 tbody tr td {
+  width: 110px;
+  height: 30px;
+  padding: 9px 0;
+  border-bottom: 2px solid #1d313c;
+  border-right: 2px solid #1d313c;
+  font-weight: normal;
+}
+#table #table-result2 tbody tr th:last-child, #table #table-result2 tbody tr th:last-child,
+#table #table-result2 tbody tr td:last-child,
+#table #table-result2 tbody tr td:last-child {
+  border-right: none;
+}
+#table #table-result2 tbody tr:last-child th, #table #table-result2 tbody tr:last-child td {
+  border-bottom: none;
+}
+#table #result-select-message2 {
+  color: #c43b39;
+  position: absolute;
+  top: 580px;
+  left: 40px;
+}
+@media (max-width: 576px) {
+  #table #result-select-message2 {
+    top: 590px;
+  }
+}
+#table .result-buttons2 {
+  position: absolute;
+  top: 985px;
+  left: 285px;
+  display: flex;
+  gap: 4px;
+}
+@media (max-width: 576px) {
+  #table .result-buttons2 {
+    display: flex;
+    gap: 16px;
+    top: 976px;
+    left: 262px;
+  }
+}
+#table .result-buttons2 #result-reset2 {
+  font-family: "koruri";
+  white-space: nowrap;
+  border: 2px solid #1d313c;
+  border-radius: 26px;
+  color: #fff;
+  background: #c43b39;
+  padding: 8px 36px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+@media (max-width: 576px) {
+  #table .result-buttons2 #result-reset2 {
+    height: 70px;
+    width: 165px;
+  }
+}
+@media (hover: hover) {
+  #table .result-buttons2 #result-reset2:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+#table .result-buttons2 #result-reset2:active {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+#table .result-buttons2 #result-select2 {
+  font-family: "koruri";
+  white-space: nowrap;
+  border: 2px solid #1d313c;
+  border-radius: 26px;
+  color: #fff;
+  background: #50a3ab;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+@media (max-width: 576px) {
+  #table .result-buttons2 #result-select2 {
+    height: 70px;
+    width: 165px;
+  }
+}
+@media (hover: hover) {
+  #table .result-buttons2 #result-select2:hover {
+    background: #1d313c;
+    cursor: pointer;
+  }
+}
+#table .result-buttons2 #result-select2:active {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+
+/* ------ローディング結果１------ */
+#white-loading1 {
+  position: absolute;
+  opacity: 0;
+  top: 145px;
+  left: 40px;
+  background: #fff;
+  width: 790px;
+  height: 359px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+@media (max-width: 576px) {
+  #white-loading1 {
+    top: 132px;
+  }
+}
+#white-loading1.appear {
+  opacity: 0.7;
+  pointer-events: none;
+  transition: 0.1s;
+}
+
+#loading-img1 {
+  position: absolute;
+  opacity: 0;
+  top: 226px;
+  left: 308px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+@media (max-width: 576px) {
+  #loading-img1 {
+    top: 211px;
+  }
+}
+#loading-img1.appear {
+  opacity: 1;
+  pointer-events: none;
+  transition: 0.1s;
+}
+
+/* ------ローディング結果２------ */
+#white-loading2 {
+  position: absolute;
+  opacity: 0;
+  top: 610px;
+  left: 40px;
+  background: #fff;
+  width: 790px;
+  height: 359px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+#white-loading2.appear {
+  opacity: 0.8;
+  transition: 0.1s;
+}
+
+#loading-img2 {
+  position: absolute;
+  opacity: 0;
+  top: 689px;
+  left: 308px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+#loading-img2.appear {
+  opacity: 1;
+  transition: 0.1s;
+}
+
+/* 比較ボタン */
+#compare-btn {
+  font-family: "koruri";
+  background: #fff;
+  color: #1d313c;
+  border: 2px solid #1d313c;
+  border-radius: 26px;
+  transition: 0.3s;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto 14px;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+}
+@media (max-width: 576px) {
+  #compare-btn {
+    height: 70px;
+    width: 350px;
+    font-size: 1.2em;
+  }
+}
+@media (hover: hover) {
+  #compare-btn:hover {
+    background: #1d313c;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+#compare-btn:active {
+  opacity: 0.8;
+}
+/*# sourceMappingURL=style.css.map */
