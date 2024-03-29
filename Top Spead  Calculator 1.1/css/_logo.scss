@@ -1,0 +1,111 @@
+@font-face {
+  font-family: "koruri";
+  src: url("../font/Koruri-Bold.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  background: #50a3ab;
+  color: #1d313c;
+  font-family: "koruri";
+  background-image: linear-gradient(90deg, transparent 39px, #1d313c 40px), linear-gradient(0deg, transparent 39px, #1d313c 40px);
+  background-size: 40px 40px;
+}
+
+img {
+  pointer-events: none;
+}
+
+.wrapper {
+  width: 900px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin: 0;
+  /* font-size: 1.4em; */
+  font-weight: normal;
+}
+
+h3 {
+  margin: 0;
+  font-weight: normal;
+}
+
+p {
+  font-weight: normal;
+  margin: 0;
+}
+
+/* ----------タイトルバー----------- */
+.title-bar {
+  border-top: 24px solid #1d313c;
+
+  .sprocket1 {
+    position: absolute;
+    top: 0;
+    left: 4px;
+  }
+
+  .sprocket2 {
+    position: absolute;
+    top: 0;
+    left: 26px;
+  }
+
+  .sprocket3 {
+    position: absolute;
+    top: 0;
+    left: 48px;
+  }
+
+  .sprocket4 {
+    position: absolute;
+    top: 0;
+    left: 880px;
+  }
+}
+
+.sprocket4-ex {
+  position: absolute;
+  top: 0;
+  left: 530px;
+}
+
+.sprocket4-hel {
+  position: absolute;
+  top: 0;
+  left: 285px;
+}
+
+/* ----------ロゴ----------- */
+
+.logo {
+  margin: 32px auto;
+  background: #fadac1;
+  width: 900px;
+  border: 8px solid #1d313c;
+  border-radius: 16px;
+  box-shadow: #222 16px 16px;
+  position: relative;
+
+  h1 {
+    margin: 0;
+
+    img {
+      display: block;
+      margin: 32px auto;
+      background: #fff;
+      border: 8px solid #1d313c;
+      padding: 16px 0;
+    }
+  }
+}
+
+/* フッター */
+
+small {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
