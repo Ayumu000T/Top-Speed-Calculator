@@ -1,0 +1,20 @@
+$breakpoints: (
+  sm: 576px,
+);
+
+@mixin max($breakpoint) {
+  @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
+    @content;
+  }
+}
+
+
+$touchBreakpoints: (
+  touch: (hover: hover)
+);
+
+@mixin touch-device-only {
+  @media #{inspect(map-get($touchBreakpoints,touch))} {
+    @content;
+  }
+}
