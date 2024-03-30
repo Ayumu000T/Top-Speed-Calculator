@@ -4,9 +4,7 @@
   const calc = document.getElementById('calc');
   const calcBtn = document.getElementById('calc-btn');
   const resetBtn = document.getElementById('reset-btn');
-  // const whiteLoading1 = document.getElementById('loading1');
   const whiteLoading2 = document.getElementById('white-loading2');
-  // const loadingImg1 = document.getElementById('loading-img1');
   const loadingImg2 = document.getElementById('loading-img2');
   const table = document.getElementById('table');
   const tableResult1 = document.getElementById('table-result1');
@@ -304,8 +302,8 @@
     if (motoName.trim() !== '') {
       localStorage.setItem(motoName, JSON.stringify(motoToSave));
       loadSavedData();
-      loadBtnActive();
-      dataDeleteBtnActive();
+      // loadBtnActive();
+      // dataDeleteBtnActive();
       balloon.classList.add('appear');
       setTimeout(() => {
         balloon.classList.remove('appear');
@@ -358,74 +356,45 @@
 
   //読み込みボタン
   const load = document.getElementById('load');
-  load.disabled = true;
   load.classList.add('is-inactive');
   document.addEventListener('DOMContentLoaded', () => {
-    loadBtnActive();
-    dataDeleteBtnActive();
     loadSavedData();
   });
 
-  function loadBtnActive() {
-    const keys = Object.keys(localStorage);
-    const load = document.getElementById('load');
-    load.classList.remove('is-active', 'is-inactive');
-
-    if (keys.length > 0) {
-      load.disabled = false;
-      load.classList.add('is-active');
-    } else {
-      load.disabled = true;
-      load.classList.add('is-inactive');
-    }
-  }
 
   load.addEventListener('click', () => {
     const savedDataSelect = document.getElementById('savedData');
 
-    if (savedDataSelect.selectedIndex !== -1) {
-      const selectedKey = savedDataSelect.value;
-      loadDataIntoInputs(selectedKey);
-      update();
-    } else if (savedDataSelect.selectedIndex !== -1) {
+    if (savedDataSelect.selectedIndex === 0) {
+      window.alert('数値を選択してください。');
       return
     }
+
+
+    const selectedKey = savedDataSelect.value;
+    loadDataIntoInputs(selectedKey);
+    update();
+
   });
 
-  loadSavedData();
 
   //削除ボタン
   const dataDelete = document.getElementById('delete');
-  dataDelete.disabled = true;
-  dataDelete.classList.add('is-inactive');
+
   dataDelete.addEventListener('click', () => {
     const savedDataSelect = document.getElementById('savedData');
     const selectKey = savedDataSelect.value;
 
 
-    if (window.confirm(`"${selectKey}"を削除しますか？`)) {
-      localStorage.removeItem(selectKey);
-      loadBtnActive();
-    } else {
+    if (savedDataSelect.selectedIndex === 0) {
+      window.alert('削除する数値を選択してください。');
       return
+    } else if (window.confirm(`"${selectKey}"を削除しますか？`)) {
+      localStorage.removeItem(selectKey);
     }
-    dataDeleteBtnActive();
+
+    loadSavedData()
   });
-
-  function dataDeleteBtnActive() {
-    const keys = Object.keys(localStorage);
-    const dataDelete = document.getElementById('delete');
-    dataDelete.classList.remove('is-active', 'is-inactive');
-
-    if (keys.length > 0) {
-      dataDelete.disabled = false;
-      dataDelete.classList.add('is-active');
-    } else {
-      dataDelete.disabled = true;
-      dataDelete.classList.add('is-inactive');
-    }
-    loadSavedData();
-  }
 
 
   //最高速度の計算
@@ -531,7 +500,7 @@
     function otherRpmSetValue(offset, label) {
       const adjustedRpm = otherRpm(offset);
 
-      
+
       if (tableResult1) {
         const adjustedRpmTopSpeed = Math.floor(adjustedRpm / overallGearRatio() * outerDiameter() * Math.PI * 60 / 1000000);
 
