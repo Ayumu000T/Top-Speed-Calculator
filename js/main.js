@@ -1,539 +1,517 @@
 "use strict";
 
 {
-  const calc = document.getElementById('calc');
-  const calcBtn = document.getElementById('calc-btn');
-  const resetBtn = document.getElementById('reset-btn');
-  const whiteLoading2 = document.getElementById('white-loading2');
-  const loadingImg2 = document.getElementById('loading-img2');
-  const table = document.getElementById('table');
-  const tableResult1 = document.getElementById('table-result1');
-  const tableResult2 = document.getElementById('table-result2');
-  const fukidashiResult1 = document.getElementById('fukidashi-result1');
-  const fukidashiResult2 = document.getElementById('fukidashi-result2');
-  const resultReset1 = document.getElementById('result-reset1');
-  const resultReset2 = document.getElementById('result-reset2');
-  const resultSelect1 = document.getElementById('result-select1');
-  const resultSelect2 = document.getElementById('result-select2');
-  const compareBtn = document.getElementById('compare-btn');
-  const compareOpen = document.getElementById('compare-open');
-  const compareClose = document.getElementById('compare-close');
-  const resultSelectMessage1 = document.getElementById('result-select-message1');
-  const resultSelectMessage2 = document.getElementById('result-select-message2');
-  const resultButtons2 = document.querySelector('.result-buttons2');
-  const resultDisplayTarget1 = document.getElementById('result-display-target1');
-  const resultDisplayTarget2 = document.getElementById('result-display-target2');
-  const trElements1 = document.querySelectorAll('.tr1');
-  const trElements2 = document.querySelectorAll('.tr2');
-
-
-
-  //ページ読み込み時
-  tableResult2.style.display = 'none';
-  fukidashiResult1.style.display = 'block';
-  fukidashiResult2.style.display = 'none';
-  whiteLoading2.style.display = 'none';
-  loadingImg2.style.display = 'none';
-  resultReset2.style.display = 'none';
-  resultSelect2.style.display = 'none';
-  compareOpen.style.display = 'block';
-  compareClose.style.display = 'none';
-  resultSelectMessage1.style.display = 'none';
-  resultSelectMessage2.style.display = 'none';
-  resultButtons2.style.display = 'none';
-  calcBtn.disabled = true;
-  calcBtn.classList.add('is-inactive');
-  resultSelect1.disabled = true;
-  resultSelect1.classList.add('is-inactive');
-
-
-
-  calc.addEventListener('input', update);
-  calc.addEventListener('change', update);
-  resetBtn.addEventListener('click', reset);
-
-
-  //計算ボタン
-  calcBtn.addEventListener('click', () => {
-    table.scrollIntoView({ behavior: 'smooth' });
-    targetTableResults();
-    allGears();
-  });
-
-
-  //計算結果の表示先の選択
-  resultSelect1.addEventListener('click', () => {
-    calcBtn.setAttribute('data-target', 'table-result1');
-    tableResult1.classList.add('select');
-    tableResult2.classList.remove('select');
-    resultSelectMessage1.style.display = 'block'
-    resultSelectMessage2.style.display = 'none'
-    resultDisplayTarget1.classList.add('appear');
-    resultDisplayTarget2.classList.remove('appear');
-  });
-  resultSelect2.addEventListener('click', () => {
-    calcBtn.setAttribute('data-target', 'table-result2');
-    tableResult1.classList.remove('select');
-    tableResult2.classList.add('select');
-    resultSelectMessage1.style.display = 'none'
-    resultSelectMessage2.style.display = 'block'
-    resultDisplayTarget2.classList.add('appear');
-    resultDisplayTarget1.classList.remove('appear');
-  });
-
-
-  //計算中GIFアニメ等の表示の選択
-  function targetTableResults() {
-    const calcBtn = document.getElementById('calc-btn');
-    const dataTarget = calcBtn.getAttribute('data-target');
-    const loadingImg1 = document.getElementById('loading-img1');
-    const whiteLoading1 = document.getElementById('white-loading1')
-    const whiteLoading2 = document.getElementById('white-loading2');
-    const loadingImg2 = document.getElementById('loading-img2');
-
-    if (dataTarget === 'table-result1') {
-      whiteLoading1.classList.add('appear');
-      loadingImg1.classList.add('appear');
-      setTimeout(() => {
-        whiteLoading1.classList.remove('appear');
-        loadingImg1.classList.remove('appear');
-      }, 1000);
-    } else if (dataTarget === 'table-result2') {
-      whiteLoading2.style.display = 'block';
-      loadingImg2.style.display = 'block';
-      whiteLoading2.classList.add('appear');
-      loadingImg2.classList.add('appear');
-
-      setTimeout(() => {
-        whiteLoading2.classList.remove('appear');
-        loadingImg2.classList.remove('appear');
-      }, 1000);
-    }
-  }
-
-  // 結果ハイライト
-  trElements1.forEach((tr1) => {
-    tr1.addEventListener('click', () => {
-      tr1.classList.toggle('highlight');
-    });
-  });
-  trElements2.forEach((tr2) => {
-    tr2.addEventListener('click', () => {
-      tr2.classList.toggle('highlight');
-    });
-  });
-
-
   //計算機入力更新
-  function update() {
-    const isRequired = calc.checkValidity();
-    const ratioInputs = document.querySelectorAll('[id^="ratio"]');
-    const calcBtn = document.getElementById('calc-btn');
-    const resetBtn = document.getElementById('reset-btn');
+  class Update {
+    constructor() {
+      this.calc = document.getElementById('calc');
+      this.isRequired = this.calc.checkValidity();
+      this.ratioInputs = document.querySelectorAll('[id^="ratio"]');
+      this.calcBtn = document.getElementById('calc-btn');
+      this.resetBtn = document.getElementById('reset-btn');
 
-    const oneInputValue = Array.prototype.some.call(ratioInputs, (input) => {
-      return input.value.trim() !== '' && !isNaN(parseFloat(input.value));
-    });
+      this.calc.addEventListener('input', () => this.inputUpdate());
+      this.calc.addEventListener('change', () => this.inputUpdate());
 
-    calcBtn.classList.remove('is-inactive', 'is-active');
-
-    if (isRequired && oneInputValue) {
-      calcBtn.disabled = false;
-      calcBtn.classList.add('is-active');
-      return
-    } else {
-      calcBtn.disabled = true;
-      calcBtn.classList.add('is-inactive');
+      this.inputUpdate();
     }
 
-    resetBtn.addEventListener('click', () => {
-      calcBtn.classList.remove('is-active');
-      calcBtn.disabled = true;
-    });
-  }
-
-
-  //計算機リセットボタン
-  function reset() {
-    const form = document.getElementById('calc');
-    form.reset();
-    update();
-  }
-
-  //結果リセットボタン
-  const rapmOffsetsReset = [500, 1000];
-
-  resultReset1.addEventListener('click', () => {
-    document.getElementById('moto-name-value1').textContent = '';
-    for (let gear = 1; gear <= 6; gear++) {
-      document.getElementById('result1-gear' + gear).textContent = '';
-      document.getElementById('base1-rpm').textContent = '---?---';
-
-      rapmOffsetsReset.forEach(offsetReset => {
-        document.getElementById(`minus${offsetReset}-1-gear` + gear).textContent = '';
-        document.getElementById(`plus${offsetReset}-1-gear` + gear).textContent = '';
-        document.getElementById(`minus${offsetReset}-1`).textContent = `-${offsetReset}`;
-        document.getElementById(`plus${offsetReset}-1`).textContent = `+${offsetReset}`;
+    inputUpdate() {
+      const oneInputValue = Array.prototype.some.call(this.ratioInputs, (input) => {
+        return input.value.trim() !== '' && !isNaN(parseFloat(input.value));
       });
-    }
-    trElements1.forEach((tr1) => {
-      tr1.classList.remove('highlight');
-    });
-  });
 
-  resultReset2.addEventListener('click', () => {
-    document.getElementById('moto-name-value2').textContent = '';
-    for (let gear = 1; gear <= 6; gear++) {
-      document.getElementById('result2-gear' + gear).textContent = '';
-      document.getElementById('base2-rpm').textContent = '---?---';
+      this.isRequired = this.calc.checkValidity();
 
-      rapmOffsetsReset.forEach(offsetReset => {
-        document.getElementById(`minus${offsetReset}-2-gear` + gear).textContent = '';
-        document.getElementById(`plus${offsetReset}-2-gear` + gear).textContent = '';
-        document.getElementById(`minus${offsetReset}-2`).textContent = `-${offsetReset}`;
-        document.getElementById(`plus${offsetReset}-2`).textContent = `+${offsetReset}`;
-      });
-    }
-    trElements2.forEach((tr2) => {
-      tr2.classList.remove('highlight');
-    });
-  });
+      this.calcBtn.classList.remove('is-inactive', 'is-active');
 
-
-  //比較ボタン
-  compareBtn.addEventListener('click', () => {
-    if (tableResult2.style.display === 'block') {
-      tableResult1.classList.remove('select');
-      tableResult2.classList.remove('select');
-      calcBtn.setAttribute('data-target', 'table-result1');
-    } else if (tableResult2.style.display === 'none') {
-      tableResult2.classList.add('select');
-      calcBtn.setAttribute('data-target', 'table-result2');
-    }
-
-
-    resultSelect1.disabled = !resultSelect1.disabled;
-    resultSelect1.classList.toggle('is-inactive');
-
-    const tableResult2Display = getComputedStyle(tableResult2).display;
-    const fukidashiResult1Display = getComputedStyle(fukidashiResult1).display;
-    const fukidashiResu2t1Display = getComputedStyle(fukidashiResult2).display;
-    const resultReset2Display = getComputedStyle(resultReset2).display;
-    const resultSelect2Display = getComputedStyle(resultSelect2).display;
-    const compareOpenDisplay = getComputedStyle(compareOpen).display;
-    const compareCloseDisplay = getComputedStyle(compareClose).display;
-    const resultButtons2Display = getComputedStyle(resultButtons2).display;
-    const whiteLoading2Display = getComputedStyle(whiteLoading2).display;
-    const loadingImg2Display = getComputedStyle(loadingImg2).display;
-
-
-    tableResult2.style.display = tableResult2Display === 'none' ? 'block' : 'none';
-    fukidashiResult1.style.display = fukidashiResult1Display === 'block' ? 'none' : 'block';
-    fukidashiResult2.style.display = fukidashiResu2t1Display === 'none' ? 'block' : 'none';
-    resultReset2.style.display = resultReset2Display === 'none' ? 'block' : 'none';
-    resultSelect2.style.display = resultSelect2Display === 'none' ? 'block' : 'none';
-    compareOpen.style.display = compareOpenDisplay === 'block' ? 'none' : 'block';
-    compareClose.style.display = compareCloseDisplay === 'block' ? 'none' : 'block';
-    resultButtons2.style.display = resultButtons2Display === 'none' ? 'flex' : 'none';
-    whiteLoading2.style.display = whiteLoading2Display === 'none' ? 'block' : 'none';
-    loadingImg2.style.display = loadingImg2Display === 'none' ? 'block' : 'none';
-
-    if (tableResult2.style.display === 'block') {
-      resultSelectMessage2.style.display = 'block';
-      resultDisplayTarget2.classList.add('appear');
-    } else if (tableResult2.style.display === 'none') {
-      resultSelectMessage1.style.display = 'none';
-      resultSelectMessage2.style.display = 'none';
-    }
-
-    if (tableResult2.style.display === 'block') {
-      resultDisplayTarget2.classList.add('appear');
-    } else if (tableResult2.style.display === 'none') {
-      resultDisplayTarget1.classList.remove('appear');
-      resultDisplayTarget2.classList.remove('appear');
-    }
-
-    if (tableResult2.style.display === 'block') {
-      tableResult1.scrollIntoView({ behavior: 'smooth' });
-    } else if (tableResult2.style.display === 'none') {
-      calcBtn.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-
-
-  //入力数値保存ローカル
-  document.getElementById('save-btn').addEventListener('click', () => {
-    const motoName = document.getElementById('moto-name').value;
-    const rpm = document.getElementById('rpm').value;
-    const primary = document.getElementById('primary').value;
-    const secondary = document.getElementById('secondary').value;
-    const sprocketF = document.getElementById('sprocketF').value;
-    const sprocketR = document.getElementById('sprocketR').value;
-    const tireWidth = document.getElementById('tireWidth').value;
-    const aspectRatio = document.getElementById('aspectRatio').value;
-    const inch = document.getElementById('inch').value;
-    const ratio1 = document.getElementById('ratio1').value;
-    const ratio2 = document.getElementById('ratio2').value;
-    const ratio3 = document.getElementById('ratio3').value;
-    const ratio4 = document.getElementById('ratio4').value;
-    const ratio5 = document.getElementById('ratio5').value;
-    const ratio6 = document.getElementById('ratio6').value;
-
-    const motoToSave = [
-      motoName,
-      rpm,
-      primary,
-      secondary,
-      sprocketF,
-      sprocketR,
-      tireWidth,
-      aspectRatio,
-      inch,
-      ratio1,
-      ratio2,
-      ratio3,
-      ratio4,
-      ratio5,
-      ratio6
-    ];
-
-    const balloon = document.getElementById('balloon');
-
-    if (motoName.trim() !== '') {
-      localStorage.setItem(motoName, JSON.stringify(motoToSave));
-      loadSavedData();
-      // loadBtnActive();
-      // dataDeleteBtnActive();
-      balloon.classList.add('appear');
-      setTimeout(() => {
-        balloon.classList.remove('appear');
-      }, 2500);
-    } else {
-      alert('車名を入力してください')
-    }
-  });
-
-  //ドロップダウンリストに表示
-  function loadSavedData() {
-    const savedDataSelect = document.getElementById('savedData');
-    savedDataSelect.innerHTML = '<option hidden>--選択してください--</option > ';
-    const keys = Object.keys(localStorage);
-
-    keys.forEach((key) => {
-      const option = document.createElement('option');
-      option.value = key;
-      option.textContent = key;
-      savedDataSelect.appendChild(option);
-    });
-  }
-
-
-  //数値読み込み再配置
-  function loadDataIntoInputs(key) {
-    const savedString = localStorage.getItem(key);
-    const restoredNumbers = JSON.parse(savedString);
-
-    if (savedString === null) {
-      return
-    } else {
-      document.getElementById('moto-name').value = restoredNumbers[0] || '';
-      document.getElementById('rpm').value = restoredNumbers[1] || '';
-      document.getElementById('primary').value = restoredNumbers[2] || '';
-      document.getElementById('secondary').value = restoredNumbers[3] || '';
-      document.getElementById('sprocketF').value = restoredNumbers[4] || '';
-      document.getElementById('sprocketR').value = restoredNumbers[5] || '';
-      document.getElementById('tireWidth').value = restoredNumbers[6] || '';
-      document.getElementById('aspectRatio').value = restoredNumbers[7] || '';
-      document.getElementById('inch').value = restoredNumbers[8] || '';
-      document.getElementById('ratio1').value = restoredNumbers[9] || '';
-      document.getElementById('ratio2').value = restoredNumbers[10] || '';
-      document.getElementById('ratio3').value = restoredNumbers[11] || '';
-      document.getElementById('ratio4').value = restoredNumbers[12] || '';
-      document.getElementById('ratio5').value = restoredNumbers[13] || '';
-      document.getElementById('ratio6').value = restoredNumbers[14] || '';
-    }
-  }
-
-  //読み込みボタン
-  const load = document.getElementById('load');
-  load.classList.add('is-inactive');
-  document.addEventListener('DOMContentLoaded', () => {
-    loadSavedData();
-  });
-
-
-  load.addEventListener('click', () => {
-    const savedDataSelect = document.getElementById('savedData');
-
-    if (savedDataSelect.selectedIndex === 0) {
-      window.alert('数値を選択してください。');
-      return
-    }
-
-
-    const selectedKey = savedDataSelect.value;
-    loadDataIntoInputs(selectedKey);
-    update();
-
-  });
-
-
-  //削除ボタン
-  const dataDelete = document.getElementById('delete');
-
-  dataDelete.addEventListener('click', () => {
-    const savedDataSelect = document.getElementById('savedData');
-    const selectKey = savedDataSelect.value;
-
-
-    if (savedDataSelect.selectedIndex === 0) {
-      window.alert('削除する数値を選択してください。');
-      return
-    } else if (window.confirm(`"${selectKey}"を削除しますか？`)) {
-      localStorage.removeItem(selectKey);
-    }
-
-    loadSavedData()
-  });
-
-
-  //最高速度の計算
-  function allGears() {
-    for (let gear = 1; gear <= 6; gear++) {
-      topSpeed(gear);
-    }
-  };
-
-  function topSpeed(gear) {
-
-    //スプロケット丁数
-    function sprockets() {
-      const sprocketF = parseFloat(document.getElementById('sprocketF').value);
-      const sprocketR = parseFloat(document.getElementById('sprocketR').value);
-
-      return Math.floor((sprocketR / sprocketF) * 1000) / 1000;
-    }
-
-    //総減速比
-    function overallGearRatio() {
-      const primary = parseFloat(document.getElementById('primary').value);
-      const secondary = parseFloat(document.getElementById('secondary').value);
-      const ratio = parseFloat(document.getElementById('ratio' + gear).value);
-      const sprocketF = document.getElementById('sprocketF').value.trim();
-      const sprocketR = document.getElementById('sprocketR').value.trim();
-
-      if (sprocketF !== '' && sprocketR !== '') {
-        return primary * sprockets() * ratio;
+      if (this.isRequired && oneInputValue) {
+        this.calcBtn.disabled = false;
+        this.calcBtn.classList.add('is-active');
       } else {
-        return primary * secondary * ratio;
+        this.calcBtn.disabled = true;
+        this.calcBtn.classList.add('is-inactive');
+      }
+
+      this.resetBtn.addEventListener('click', () => {
+        this.calcBtn.classList.remove('is-active');
+        this.calcBtn.disabled = true;
+      });
+    }
+  }
+
+  const updateInstance = new Update();
+
+  //ローカルストレージ関連
+  class MotoData {
+    constructor() {
+      this.savedDataSelect = document.getElementById('savedData');
+      this.saveBtn = document.getElementById('save-btn');
+      this.loadBtn = document.getElementById('load');
+      this.dataDeleteBtn = document.getElementById('delete');
+      this.inputs = ['moto-name', 'rpm', 'primary', 'secondary', 'sprocketF', 'sprocketR', 'tireWidth', 'aspectRatio', 'inch', 'ratio1', 'ratio2', 'ratio3', 'ratio4', 'ratio5', 'ratio6'];
+      this.init();
+    }
+
+    init() {
+      this.saveBtn.addEventListener('click', () => this.saveData());
+      this.dataDeleteBtn.addEventListener('click', () => this.dataDelete());
+      this.loadBtn.addEventListener('click', () => this.loadSavedData());
+      this.addSavedData();
+    }
+
+    //ローカルストレージに保存
+    saveData() {
+      const motoName = document.getElementById('moto-name').value.trim();
+      const balloon = document.getElementById('balloon');
+
+      if (motoName !== '') {
+        const motoToSave = this.inputMotoData();
+        localStorage.setItem(motoName, JSON.stringify(motoToSave));
+        this.addSavedData();
+        balloon.classList.add('appear');
+        setTimeout(() => {
+          balloon.classList.remove('appear');
+        }, 2500);
+      } else {
+        alert('車名を入力してください');
       }
     }
 
-    //タイヤの外径
-    function outerDiameter() {
-      const tireWidth = parseFloat(document.getElementById('tireWidth').value);
-      const aspectRatio = parseFloat(document.getElementById('aspectRatio').value);
-      const inch = parseFloat(document.getElementById('inch').value);
+    //calcのinputの値取得
+    inputMotoData() {
+      return this.inputs.map(input => document.getElementById(input).value);
+    }
 
-      const thickness = tireWidth * (aspectRatio / 100) * 2;
-      const wheel = (inch * 2.54) * 10;
+    //selectに追加表示
+    addSavedData() {
+      this.savedDataSelect.innerHTML = '<option hidden>--選択してください--</option>';
+      const keys = Object.keys(localStorage);
+      keys.forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = key;
+        this.savedDataSelect.appendChild(option);
+      });
+    }
+
+    //保存データ読み込み
+    loadSavedData() {
+      const selectkey = this.savedDataSelect.value;
+      this.loadSavedDataIntoInputs(selectkey);
+    }
+
+    loadSavedDataIntoInputs(key) {
+      const saveedString = localStorage.getItem(key);
+      const restoredValues = JSON.parse(saveedString);
+      if (saveedString === null) {
+        window.alert('数値を選択してください。');
+        return
+      }
+      this.inputs.forEach((input, index) => {
+        document.getElementById(input).value = restoredValues[index] || '';
+        updateInstance.inputUpdate();
+      });
+    }
+
+    //データ削除
+    dataDelete() {
+      const selectKey = this.savedDataSelect.value;
+      if (this.savedDataSelect.selectedIndex === 0) {
+        window.alert('削除する数値を選択してください。');
+        return
+      } else if (window.confirm(`${selectKey}を削除しますか?`)) {
+        localStorage.removeItem(selectKey);
+        this.addSavedData();
+      }
+    }
+  }
+
+  new MotoData();
+
+
+  class CalcTopSpeed {
+    constructor() {
+      this.rpm = parseFloat(document.getElementById('rpm').value.trim());
+      this.sprocketF = parseFloat(document.getElementById('sprocketF').value.trim());
+      this.sprocketR = parseFloat(document.getElementById('sprocketR').value.trim());
+      this.primary = parseFloat(document.getElementById('primary').value);
+      this.secondary = parseFloat(document.getElementById('secondary').value);
+      this.tireWidth = parseFloat(document.getElementById('tireWidth').value);
+      this.aspectRatio = parseFloat(document.getElementById('aspectRatio').value);
+      this.inch = parseFloat(document.getElementById('inch').value);
+      this.tableResult1 = document.getElementById('table-result1');
+      this.tableResult2 = document.getElementById('table-result2');
+      this.calcBtn = document.getElementById('calc-btn');
+      this.resetBtn = document.getElementById('reset-btn');
+      this.targetTableId = this.calcBtn.getAttribute('data-target');
+      this.changeTarget()
+    }
+
+    //スプロケットの丁数
+    sprockets() {
+      if (this.sprocketF !== '' && this.sprocketR !== '' && !isNaN(this.sprocketF) && !isNaN(this.sprocketR)) {
+        return Math.floor((this.sprocketR / this.sprocketF) * 1000) / 1000;
+      } else {
+        return;
+      }
+    }
+
+    //総減速比
+    overallGearRatio() {
+      const ratios = [];
+      for (let gear = 1; gear <= 6; gear++) {
+        const ratio = parseFloat(document.getElementById('ratio' + gear).value.trim());
+        if (this.sprocketF !== '' && this.sprocketR !== '' && !isNaN(this.sprocketF) && !isNaN(this.sprocketR)) {
+          ratios.push(this.primary * this.sprockets() * ratio);
+        } else {
+          ratios.push(this.primary * this.secondary * ratio);
+        }
+      }
+      return ratios;
+    }
+
+    //タイヤの外径
+    outerDiameter() {
+      const thickness = this.tireWidth * (this.aspectRatio / 100) * 2;
+      const wheel = (this.inch * 2.54) * 10;
 
       return thickness + wheel;
     }
 
+
     //トップスピード
-    const rpm = parseFloat(document.getElementById('rpm').value);
-    const ratio0 = document.getElementById('ratio' + gear).value.trim();
-    const calcBtn = document.getElementById('calc-btn');
-    const targetTableId = calcBtn.getAttribute('data-target');
-    const tableResult1 = targetTableId === 'table-result1';
-    const tableResult2 = targetTableId === 'table-result2';
+    topSpeed(target) {
+      const overallRatios = this.overallGearRatio();
+      const motoName = document.getElementById('moto-name').value;
 
-    if (tableResult1) {
-      calcForTable1();
-    } else if (tableResult2) {
-      calcForTable2();
-    }
+      for (let gear = 1; gear <= 6; gear++) {
 
-    function calcForTable1() {
-      const motoName1 = document.getElementById('moto-name').value; //車名
-      const t = Math.floor(rpm / overallGearRatio() * outerDiameter() * Math.PI * 60 / 1000000);
-      const nonRatio = document.getElementById('ratio' + gear).value.trim();
-      const result1Gear = document.getElementById('result1-gear' + gear);
-      if (gear === gear && nonRatio === '') {
-        result1Gear.textContent = '';
-      } else {
-        setTimeout(() => {
-          document.getElementById('result1-gear' + gear).textContent = `${t}km/h`;
-          document.getElementById('base1-rpm').textContent = `${rpm}`;
-          document.getElementById('moto-name-value1').textContent = motoName1;
-        }, 1000);
+        const nonRatio = document.getElementById('ratio' + gear).value.trim();
+
+        const t = Math.floor(this.rpm / overallRatios[gear - 1] * this.outerDiameter() * Math.PI * 60 / 1000000);
+        const resultGear = document.getElementById(`result${target}-gear` + gear);
+        if (gear === gear && nonRatio === '') {
+          resultGear.textContent = '';
+        } else {
+          setTimeout(() => {
+            resultGear.textContent = `${t}km/h`;
+            document.getElementById(`base${target}-rpm`).textContent = `${this.rpm}`;
+            document.getElementById(`moto-name-value${target}`).textContent = motoName;
+          }, 1000);
+        }
       }
-    }
-
-    function calcForTable2() {
-      const motoName2 = document.getElementById('moto-name').value; //車名
-      const t = Math.floor(rpm / overallGearRatio() * outerDiameter() * Math.PI * 60 / 1000000);
-      const nonRatio = document.getElementById('ratio' + gear).value.trim();
-      const result1Gear = document.getElementById('result2-gear' + gear);
-      if (gear === gear && nonRatio === '') {
-        result1Gear.textContent = '';
-      } else {
-        setTimeout(() => {
-          document.getElementById('result2-gear' + gear).textContent = `${t}km/h`;
-          document.getElementById('base2-rpm').textContent = `${rpm}`;
-          document.getElementById('moto-name-value2').textContent = motoName2;
-        }, 1000);
-      }
+      this.otherTopSpeed();
     }
 
     //±500rpm,±1000rpm
-    function otherRpm(offset) {
-      const rpm = parseFloat(document.getElementById('rpm').value);
+    otherRpm(offset) {
       const rpmOffsets = [offset];
-
-      const adjustedRpm = rpm + rpmOffsets.reduce((sum, currentOffset) => sum + currentOffset, 0);
+      const adjustedRpm = this.rpm + rpmOffsets.reduce((sum, currentOffset) => sum + currentOffset, 0);
       return adjustedRpm;
     }
 
+    otherRpmSetValue(offset, label, target) {
 
-    function otherRpmSetValue(offset, label) {
-      const adjustedRpm = otherRpm(offset);
-
-
-      if (tableResult1) {
-        const adjustedRpmTopSpeed = Math.floor(adjustedRpm / overallGearRatio() * outerDiameter() * Math.PI * 60 / 1000000);
-
+      for (let gear = 1; gear <= 6; gear++) {
         const nonRatio = document.getElementById('ratio' + gear).value.trim();
-        const result1Gear = document.getElementById(`${label}-1-gear` + gear);
+        const result1Gear = document.getElementById(`${label}-${target}-gear` + gear);
 
+        const adjustedRpm = this.otherRpm(offset);
+        const overallGearRatios = this.overallGearRatio();
+        const outerDiameter = this.outerDiameter();
+        const adjustedRpmTopSpeed = Math.floor(adjustedRpm / overallGearRatios[gear - 1] * outerDiameter * Math.PI * 60 / 1000000);
         if (gear === gear && nonRatio === '') {
           result1Gear.textContent = '';
         } else {
           setTimeout(() => {
-            document.getElementById(`${label}-1-gear` + gear).textContent = `${adjustedRpmTopSpeed}km/h`;
-            document.getElementById(`${label}-1`).textContent = `${adjustedRpm}`;
-          }, 1000);
-        }
-      } else if (tableResult2) {
-        const adjustedRpmTopSpeed = Math.floor(adjustedRpm / overallGearRatio() * outerDiameter() * Math.PI * 60 / 1000000);
-
-        const nonRatio = document.getElementById('ratio' + gear).value.trim();
-        const result1Gear = document.getElementById(`${label}-2-gear` + gear);
-
-        if (gear === gear && nonRatio === '') {
-          result1Gear.textContent = '';
-        } else {
-          setTimeout(() => {
-            document.getElementById(`${label}-2-gear` + gear).textContent = `${adjustedRpmTopSpeed}km/h`;
-            document.getElementById(`${label}-2`).textContent = `${adjustedRpm}`;
+            document.getElementById(`${label}-${target}-gear` + gear).textContent = `${adjustedRpmTopSpeed}km/h`;
+            document.getElementById(`${label}-${target}`).textContent = `${adjustedRpm}`;
           }, 1000);
         }
       }
     }
-    otherRpmSetValue(500, 'plus500');
-    otherRpmSetValue(1000, 'plus1000');
-    otherRpmSetValue(-500, 'minus500');
-    otherRpmSetValue(-1000, 'minus1000');
+
+    //計算結果表示先ターゲット
+    changeTarget() {
+      if (this.targetTableId === 'table-result1') {
+        this.topSpeed(1);
+      } else if (this.targetTableId === 'table-result2') {
+        this.topSpeed(2);
+      }
+    }
+
+    otherTopSpeed() {
+      let target;
+      if (this.targetTableId === 'table-result1') {
+        target = '1';
+      } else if (this.targetTableId === 'table-result2') {
+        target = '2';
+      }
+
+      this.otherRpmSetValue(500, 'plus500', target);
+      this.otherRpmSetValue(1000, 'plus1000', target);
+      this.otherRpmSetValue(-500, 'minus500', target);
+      this.otherRpmSetValue(-1000, 'minus1000', target);
+    }
   }
+
+
+  //計算機と結果関連のボタン（数値保存はMotoDataに有り）
+  class Buttons {
+    constructor() {
+      this.calcBtn = document.getElementById('calc-btn');
+      this.resultSelect1 = document.getElementById('result-select1');
+      this.resultSelect2 = document.getElementById('result-select2');
+      this.resultReset2 = document.getElementById('result-reset2');
+      this.tableResult1 = document.getElementById('table-result1');
+      this.tableResult2 = document.getElementById('table-result2');
+      this.fukidashiResult1 = document.getElementById('fukidashi-result1');
+      this.fukidashiResult2 = document.getElementById('fukidashi-result2');
+      this.resultSelectMessage1 = document.getElementById('result-select-message1');
+      this.resultSelectMessage2 = document.getElementById('result-select-message2');
+      this.compareOpen = document.getElementById('compare-open');
+      this.compareClose = document.getElementById('compare-close');
+    }
+
+    //計算ボタンのターゲット変更(選択ボタン)
+    changeTarget1() {
+      this.calcBtn.setAttribute('data-target', 'table-result1');
+      this.resultSelectMessage1.style.display = 'block';
+      this.resultSelectMessage2.style.display = 'none';
+      this.tableResult1.classList.add('select');
+      this.tableResult2.classList.remove('select');
+    }
+    changeTarget2() {
+      this.calcBtn.setAttribute('data-target', 'table-result2');
+      this.resultSelectMessage1.style.display = 'none';
+      this.resultSelectMessage2.style.display = 'block';
+      this.tableResult1.classList.remove('select');
+      this.tableResult2.classList.add('select');
+    }
+
+    //計算結果リセットボタン
+    resultReset(target) {
+      const rapmOffsetsReset = [500, 1000];
+      document.getElementById(`moto-name-value${target}`).textContent = '';
+      for (let gear = 1; gear <= 6; gear++) {
+        document.getElementById(`result${target}-gear` + gear).textContent = '';
+        document.getElementById(`base${target}-rpm`).textContent = '---?---';
+
+        rapmOffsetsReset.forEach(offsetReset => {
+          document.getElementById(`minus${offsetReset}-${target}-gear` + gear).textContent = '';
+          document.getElementById(`plus${offsetReset}-${target}-gear` + gear).textContent = '';
+          document.getElementById(`minus${offsetReset}-${target}`).textContent = `-${offsetReset}`;
+          document.getElementById(`plus${offsetReset}-${target}`).textContent = `+${offsetReset}`;
+        });
+      }
+      const trElements = document.querySelectorAll(`.tr${target}`);
+      trElements.forEach((tr) => {
+        tr.classList.remove('highlight');
+      });
+    }
+
+    //比較ボタン
+    compareBtn() {
+      const displayNone = {
+        tableResult2: this.tableResult2,
+        resultReset2: this.resultReset2,
+        resultSelect2: this.resultSelect2,
+        fukidashiResult2: this.fukidashiResult2,
+      }
+
+      const displayBlock = {
+        fukidashiResult1: this.fukidashiResult1,
+        compareClose: this.compareClose,
+        compareOpen: this.compareOpen,
+      }
+
+      Object.entries(displayNone).forEach(([elementName, element]) => {
+        const computedStyle = getComputedStyle(element).display;
+        element.style.display = computedStyle === 'none' ? 'block' : 'none';
+      });
+      Object.entries(displayBlock).forEach(([elementName, element]) => {
+        const computedStyle = getComputedStyle(element).display;
+        element.style.display = computedStyle === 'block' ? 'none' : 'block';
+      });
+
+      if (this.tableResult2.style.display === 'block') {
+        this.changeTarget2();
+        this.tableResult1.scrollIntoView({ behavior: 'smooth' });
+        this.resultSelect1.disabled = false;
+        resultSelect1.classList.remove('is-inactive');
+      } else if (this.tableResult2.style.display === 'none') {
+        this.changeTarget1();
+        this.resultSelectMessage1.style.display = 'none';
+        this.tableResult1.classList.remove('select');
+        this.resultSelect1.disabled = true;
+        resultSelect1.classList.add('is-inactive');
+      }
+    }
+  }
+
+
+  // 結果ハイライト
+  class Highlight {
+    constructor() {
+      this.trElements1 = document.querySelectorAll('.tr1');
+      this.trElements2 = document.querySelectorAll('.tr2');
+      this.highlight();
+    }
+
+    highlight() {
+      this.trElements1.forEach((tr1) => {
+        tr1.addEventListener('click', () => {
+          tr1.classList.toggle('highlight');
+        });
+      });
+      this.trElements2.forEach((tr2) => {
+        tr2.addEventListener('click', () => {
+          tr2.classList.toggle('highlight');
+        });
+      });
+    }
+  }
+
+  new Highlight();
+
+  //アニメーション
+  class Animation {
+    constructor() {
+      this.loadingImg1 = document.getElementById('loading-img1');
+      this.loadingImg2 = document.getElementById('loading-img2');
+      this.whiteLoading1 = document.getElementById('white-loading1')
+      this.whiteLoading2 = document.getElementById('white-loading2');
+      this.dataTarget = calcBtn.getAttribute('data-target');
+      this.calcAnimation();
+    }
+
+    calcAnimation() {
+      if (this.dataTarget === 'table-result1') {
+        this.whiteLoading1.classList.add('appear');
+        this.loadingImg1.classList.add('appear');
+        setTimeout(() => {
+          this.whiteLoading1.classList.remove('appear');
+          this.loadingImg1.classList.remove('appear');
+        }, 1000);
+      } else if (this.dataTarget === 'table-result2') {
+        this.whiteLoading2.style.display = 'block';
+        this.loadingImg2.style.display = 'block';
+        this.whiteLoading2.classList.add('appear');
+        this.loadingImg2.classList.add('appear');
+        setTimeout(() => {
+          this.whiteLoading2.classList.remove('appear');
+          this.loadingImg2.classList.remove('appear');
+          this.whiteLoading2.style.display = 'none';
+          this.loadingImg2.style.display = 'none';
+        }, 1000);
+      }
+    }
+  }
+
+  /*------------------------------------------------------------------------------------------------------- */
+  /*------------------------------------------------------------------------------------------------------- */
+
+  const tableContents = {
+    table: 'table',
+    tableResult2: 'table-result2',
+    resultSelect1: 'result-select1',
+    resultSelect2: 'result-select2',
+    resultReset1: 'result-reset1',
+    resultReset2: 'result-reset2',
+    fukidashiResult1: 'fukidashi-result1',
+    fukidashiResult2: 'fukidashi-result2',
+    resultSelectMessage1: 'result-select-message1',
+    resultSelectMessage2: 'result-select-message2',
+    whiteLoading2: 'white-loading2',
+    loadingImg2: 'loading-img2',
+    compareBtn: 'compare-btn',
+    compareOpen: 'compare-open',
+    compareClose: 'compare-close',
+    calcBtn: 'calc-btn',
+    resetBtn: 'reset-btn',
+  };
+
+  const compareBtn = document.getElementById(tableContents.compareBtn);
+  const table = document.getElementById(tableContents.table);
+  const tableResult2 = document.getElementById(tableContents.tableResult2);
+  const resultSelect1 = document.getElementById(tableContents.resultSelect1);
+  const resultSelect2 = document.getElementById(tableContents.resultSelect2);
+  const resultReset1 = document.getElementById(tableContents.resultReset1);
+  const resultReset2 = document.getElementById(tableContents.resultReset2);
+  const fukidashiResult1 = document.getElementById(tableContents.fukidashiResult1);
+  const fukidashiResult2 = document.getElementById(tableContents.fukidashiResult2);
+  const resultSelectMessage1 = document.getElementById(tableContents.resultSelectMessage1);
+  const resultSelectMessage2 = document.getElementById(tableContents.resultSelectMessage2);
+  const calcBtn = document.getElementById(tableContents.calcBtn);
+  const resetBtn = document.getElementById(tableContents.resetBtn);
+  const compareOpen = document.getElementById(tableContents.compareOpen);
+  const compareClose = document.getElementById(tableContents.compareClose);
+  const whiteLoading2 = document.getElementById(tableContents.whiteLoading2);
+  const loadingImg2 = document.getElementById(tableContents.loadingImg2);
+
+
+  //初期表示設定(非表示)
+  const hidden = [
+    tableResult2,
+    resultSelect2,
+    resultReset2,
+    fukidashiResult2,
+    resultSelectMessage1,
+    resultSelectMessage2,
+    whiteLoading2,
+    loadingImg2,
+    compareClose,
+  ];
+  hidden.forEach(element => {
+    element.style.display = 'none';
+  });
+
+  //初期表示設定(表示)
+  const displayed = [
+    fukidashiResult1,
+    compareOpen
+  ];
+  displayed.forEach(element => {
+    element.style.display = 'block';
+  });
+
+
+  /*----------------------------計算ボタン・リセット---------------------------------- */
+  new Update();
+
+  calcBtn.addEventListener('click', () => {
+    new CalcTopSpeed();
+    new Animation();
+    table.scrollIntoView({ behavior: 'smooth' });
+  });
+  resetBtn.addEventListener('click', () => {
+    new Update();
+  });
+  /*----------------------------計算結果---------------------------------- */
+  const buttons = new Buttons();
+  resultSelect1.disabled = true;
+  resultSelect1.classList.add('is-inactive');
+
+  //結果１
+  resultSelect1.addEventListener('click', () => {
+    buttons.changeTarget1();
+  });
+  resultReset1.addEventListener('click', () => {
+    buttons.resultReset(1);
+  });
+
+  //結果２
+  resultSelect2.addEventListener('click', () => {
+    buttons.changeTarget2();
+  });
+  resultReset2.addEventListener('click', () => {
+    buttons.resultReset(2);
+  });
+
+  //比較ボタン
+  compareBtn.addEventListener('click', () => {
+    buttons.compareBtn();
+  });
+
 }
