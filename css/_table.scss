@@ -105,7 +105,7 @@
   .result-buttons1 {
     position: absolute;
     top: 518px;
-    left: 280px;
+    left: 260px;
 
     @include max(sm) {
       display: flex;
@@ -125,6 +125,9 @@
       cursor: pointer;
       transition: 0.3s;
       box-sizing: border-box;
+      width: 170px;
+      height: 40px;
+      margin-right: 7px;
 
       @include max(sm) {
         height: 70px;
@@ -155,6 +158,8 @@
       cursor: pointer;
       transition: 0.3s;
       box-sizing: border-box;
+      width: 170px;
+      height: 40px;
 
       @include max(sm) {
         height: 70px;
@@ -243,7 +248,7 @@
   .result-buttons2 {
     position: absolute;
     top: 985px;
-    left: 285px;
+    left: 260px;
     display: flex;
     gap: 4px;
 
@@ -265,6 +270,9 @@
       cursor: pointer;
       transition: 0.3s;
       box-sizing: border-box;
+      width: 170px;
+      height: 40px;
+      margin-right: 7px;
 
       @include max(sm) {
         height: 70px;
@@ -295,6 +303,8 @@
       cursor: pointer;
       transition: 0.3s;
       box-sizing: border-box;
+      width: 170px;
+      height: 40px;
 
       @include max(sm) {
         height: 70px;
