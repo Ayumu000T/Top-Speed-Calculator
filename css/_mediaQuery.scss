@@ -1,13 +1,14 @@
 $breakpoints: (
+  xs: 425px,
   sm: 576px,
+  md: 768px,
 );
 
-@mixin max($breakpoint) {
-  @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
+@mixin min($breakpoint) {
+  @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
     @content;
   }
 }
-
 
 $touchBreakpoints: (
   touch: (hover: hover)
@@ -16,5 +17,103 @@ $touchBreakpoints: (
 @mixin touch-device-only {
   @media #{inspect(map-get($touchBreakpoints,touch))} {
     @content;
+  }
+}
+
+
+
+@mixin font-size {
+  @media (max-width: 900px) {
+    font-size: clamp(4px, 2.5vw, 20px);
+  }
+}
+
+@mixin font-size2 {
+  font-size: 14px;
+
+  @media (max-width: 900px) {
+    font-size: clamp(2px, 2.5vw, 14px);
+  }
+
+
+  @media (min-width: 576px) and (max-width: 900px) {
+    font-size: clamp(2px, 1.6vw, 14px);
+  }
+}
+
+@mixin font-size3 {
+  font-size: 10px;
+
+  @media (max-width: 900px) {
+    font-size: clamp(2px, 2.5vw, 10px);
+  }
+
+  @media (min-width: 576px) and (max-width: 900px) {
+    font-size: clamp(2px, 1.4vw, 10px);
+  }
+}
+
+
+@mixin font-size4 {
+  @media (max-width: 900px) {
+    font-size: clamp(5px, 1vw, 60px);
+  }
+}
+
+
+
+@mixin input {
+
+  @media (max-width: 576px) {
+    height: clamp(10px, 5vw, 20px);
+  }
+}
+
+@mixin margin-y {
+  @media (max-width: 576px) {
+    margin-top: clamp(0px, 2vw, 30px);
+  }
+
+  @media (max-width: 425px) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@mixin margin-t {
+  @media (max-width: 576px) {
+    margin-top: clamp(2%, 8vw, 8%);
+  }
+
+  @media (max-width: 425px) {
+    margin-top: 4%;
+  }
+
+  @media (max-width: 320px) {
+    margin-top: 2%;
+  }
+}
+
+@mixin padding {
+  @media (max-width: 900px) {
+    padding: clamp(1px, 0.8vw, 14px);
+  }
+}
+
+@mixin padding-button {
+  @media (max-width: 900px) {
+    padding: clamp(10px, 0.8vw, 24px);
+  }
+}
+
+@mixin font-size5 {
+  @media (max-width: 900px) {
+    font-size: clamp(2px, 2.0vw, 42px);
+  }
+}
+
+@mixin font-size6 {
+  @media (max-width: 900px) {
+    font-size: clamp(4px, 1.8vw, 35px);
   }
 }

@@ -1,65 +1,32 @@
 @use '_mediaQuery' as *;
-// 結果
 
-/* --------結果ハイライト---------- */
+/* ------テーブル------ */
 
-.highlight {
-  background: #d77676;
-  color: #fff;
-}
-
-
-/* --------テーブル---------- */
 #table {
-  text-align: center;
-  margin: 18px 14px 0;
-  position: relative;
 
-  #fukidashi-result1 {
-    position: relative;
-    top: -12px;
-    left: 0;
-  }
+  #table-result1,
+  #table-result2 {
+    border: none;
+    margin: 14% auto 0;
+    text-align: center;
+    width: 95%;
 
-  #fukidashi-result2 {
-    position: relative;
-    top: -12px;
-    left: 0;
-  }
-
-  h2 {
-    color: #fff;
-    position: absolute;
-    top: 56px;
-    left: 45px;
-
-    @include max(sm) {
-      font-size: 1.8em;
-      position: absolute;
-      top: 50px;
+    @include min(sm) {
+      margin: 16% auto 0;
     }
-  }
 
-  /* --------結果１--------- */
-
-  #table-result1 {
-    display: inline-block;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 4px solid #1d313c;
-    background: #fff;
-    margin: 32px 0 32px;
-    position: absolute;
-    top: 115px;
-    left: 40px;
-
-    @include max(sm) {
-      top: 100px;
-      font-size: 1.2em;
+    @include min(md) {
+      margin: 18% auto 0;
     }
 
     &.select {
-      border: 4px solid #d77676;
+      border-top: 2px solid #d77676;
+      border-left: 2px solid #d77676;
+    }
+
+    h3 {
+      font-size: 1.2em;
+      margin: 0;
     }
 
     tbody {
@@ -68,102 +35,122 @@
 
         th,
         td {
-          width: 110px;
-          height: 30px;
-          padding: 9px 0;
-          border-bottom: 2px solid #1d313c;
-          border-right: 2px solid #1d313c;
-          font-weight: normal;
+          font-size: 1.09em;
+          @include padding;
+          @include font-size5;
 
-          &:last-child,
-          &:last-child {
-            border-right: none;
+          &.highlight {
+            background: #d77676;
+            color: #fff;
           }
         }
 
-        &:last-child th,
-        &:last-child td {
-          border-bottom: none;
+        th {
+          width: 190px;
+        }
+
+        td {
+          width: 100px;
+        }
+      }
+
+      .tr1-last,
+      .tr2-last {
+        &.select {
+          border-bottom: 2px solid #d77676;
+        }
+      }
+
+      .tr1-r,
+      .tr2-r {
+        &.select {
+          border-right: 2px solid #d77676;
         }
       }
     }
+
+    .custom-table {
+      border: none;
+    }
   }
 
-  // 結果リセット、選択ボタン
-
-  #result-select-message1 {
+  #result-select-message1,
+  #result-select-message2 {
+    font-size: 1em;
+    @include font-size6;
+    margin-top: 10%;
     color: #c43b39;
-    position: absolute;
-    top: 120px;
-    left: 40px;
+    // z-index: 1;
 
-    @include max(sm) {
-      top: 110px;
+    @include min(xs) {
+      margin-top: 11%;
+    }
+
+    @include min(sm) {
+      margin-top: 13%;
+    }
+
+    @include min(md) {
+      margin-top: 14%;
     }
   }
 
-  .result-buttons1 {
-    position: absolute;
-    top: 518px;
-    left: 260px;
 
-    @include max(sm) {
-      display: flex;
-      gap: 16px;
-      top: 495px;
-      left: 262px;
-    }
+  #table-result2 {
+    tbody {
+      tr {
 
-    #result-reset1 {
-      font-family: "koruri";
-      white-space: nowrap;
-      border: 2px solid #1d313c;
-      border-radius: 26px;
-      color: #fff;
-      background: #c43b39;
-      padding: 8px 36px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-sizing: border-box;
-      width: 170px;
-      height: 40px;
-      margin-right: 7px;
+        th {
+          width: 190px;
+        }
 
-      @include max(sm) {
-        height: 70px;
-        width: 165px;
-      }
-
-      @include touch-device-only {
-        &:hover {
-          background: #1d313c;
-          cursor: pointer;
+        td {
+          width: 105px;
         }
       }
-
-      &:active {
-        opacity: 0.8;
-        transition: 0.1s;
-      }
     }
 
-    #result-select1 {
-      font-family: "koruri";
-      white-space: nowrap;
-      border: 2px solid #1d313c;
-      border-radius: 26px;
-      color: #fff;
-      background: #50a3ab;
-      padding: 8px 24px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-sizing: border-box;
-      width: 170px;
-      height: 40px;
+    &.select {
+      border-top: 1px solid #d77676;
+      border-left: 1px solid #d77676;
+    }
+  }
 
-      @include max(sm) {
-        height: 70px;
-        width: 165px;
+
+  .result-buttons1,
+  .result-buttons2 {
+    margin-top: 56%;
+    margin-bottom: 0;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+
+    @include min(xs) {
+      margin-top: 57%;
+    }
+
+    @include min(sm) {
+      margin-top: 60%;
+    }
+
+    #result-reset1,
+    #result-select1,
+    #result-reset2,
+    #result-select2 {
+      width: 30%;
+      font-size: 0.7em;
+      @include font-size6;
+      border: 1px solid #1d313c;
+      border-radius: 8px;
+      height: 25px;
+
+      @include min(xs) {
+        height: 35px;
+      }
+
+      @include min(sm) {
+        height: 40px;
+        width: 25%;
       }
 
       @include touch-device-only {
@@ -183,246 +170,84 @@
         opacity: 0.8;
       }
     }
-  }
 
-  /* --------結果2---------- */
-
-  #table-result2 {
-    display: inline-block;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 4px solid #1d313c;
-    background: #fff;
-    text-align: center;
-    position: absolute;
-    top: 610px;
-    left: 40px;
-
-    @include max(sm) {
-      font-size: 1.2em;
-    }
-
-    &.select {
-      border: 4px solid #d77676;
-    }
-
-    tbody {
-      tr {
-
-        th,
-        td {
-          width: 110px;
-          height: 30px;
-          padding: 9px 0;
-          border-bottom: 2px solid #1d313c;
-          border-right: 2px solid #1d313c;
-          font-weight: normal;
-
-          &:last-child,
-          &:last-child {
-            border-right: none;
-          }
-        }
-
-        &:last-child th,
-        &:last-child td {
-          border-bottom: none;
-        }
-      }
-    }
-  }
-
-  #result-select-message2 {
-    color: #c43b39;
-    position: absolute;
-    top: 580px;
-    left: 40px;
-
-    @include max(sm) {
-      top: 590px;
-    }
-  }
-
-
-  /* -------結果選択・リセット2------ */
-  .result-buttons2 {
-    position: absolute;
-    top: 985px;
-    left: 260px;
-    display: flex;
-    gap: 4px;
-
-    @include max(sm) {
-      display: flex;
-      gap: 16px;
-      top: 976px;
-      left: 262px;
-    }
-
+    #result-reset1,
     #result-reset2 {
-      font-family: "koruri";
-      white-space: nowrap;
-      border: 2px solid #1d313c;
-      border-radius: 26px;
-      color: #fff;
       background: #c43b39;
-      padding: 8px 36px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-sizing: border-box;
-      width: 170px;
-      height: 40px;
-      margin-right: 7px;
-
-      @include max(sm) {
-        height: 70px;
-        width: 165px;
-      }
-
-      @include touch-device-only {
-        &:hover {
-          background: #1d313c;
-          cursor: pointer;
-        }
-      }
-
-      &:active {
-        opacity: 0.8;
-        transition: 0.1s;
-      }
     }
 
+    #result-select1,
     #result-select2 {
-      font-family: "koruri";
-      white-space: nowrap;
-      border: 2px solid #1d313c;
-      border-radius: 26px;
-      color: #fff;
       background: #50a3ab;
-      padding: 8px 24px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-sizing: border-box;
-      width: 170px;
-      height: 40px;
-
-      @include max(sm) {
-        height: 70px;
-        width: 165px;
-      }
-
-      @include touch-device-only {
-        &:hover {
-          background: #1d313c;
-          cursor: pointer;
-        }
-      }
-
-      &:active {
-        opacity: 0.8;
-        transition: 0.1s;
-      }
     }
   }
 
-
-}
-
-/* ------ローディング結果１------ */
-#white-loading1 {
-  position: absolute;
-  opacity: 0;
-  top: 145px;
-  left: 40px;
-  background: #fff;
-  width: 790px;
-  height: 359px;
-  transition: 0.3s;
-  pointer-events: none;
-
-  @include max(sm) {
-    top: 132px;
-  }
-
-  &.appear {
-    opacity: 0.7;
+  /* ------ローディング------ */
+  #white-loading1,
+  #white-loading2 {
+    opacity: 0;
+    background: #fff;
+    width: 100%;
+    transition: 0.3s;
     pointer-events: none;
-    transition: 0.1s;
+    margin: 16% auto 0;
+    width: 95%;
+    height: 70%;
+    z-index: 1;
+
+    @include min(md) {
+      margin: 18% auto 0;
+    }
+
+
+    &.appear {
+      opacity: 0.7;
+      pointer-events: none;
+      transition: 0.1s;
+    }
   }
-}
 
-#loading-img1 {
-  position: absolute;
-  opacity: 0;
-  top: 226px;
-  left: 308px;
-  transition: 0.3s;
-  pointer-events: none;
-
-  @include max(sm) {
-    top: 211px;
-  }
-
-  &.appear {
-    opacity: 1;
+  #loading-img1,
+  #loading-img2 {
+    opacity: 0;
+    transition: 0.3s;
     pointer-events: none;
-    transition: 0.1s;
+    width: 45%;
+    height: auto;
+    margin: 15% auto 0;
+    z-index: 2;
+
+    @include min(md) {
+      margin: 18% auto 0;
+    }
+
+    @include min(sm) {
+      width: 40%;
+    }
+
+    &.appear {
+      opacity: 1;
+      pointer-events: none;
+      transition: 0.1s;
+    }
   }
 }
 
-/* ------ローディング結果２------ */
-#white-loading2 {
-  position: absolute;
-  opacity: 0;
-  top: 610px;
-  left: 40px;
-  background: #fff;
-  width: 790px;
-  height: 359px;
-  transition: 0.3s;
-  pointer-events: none;
-
-  &.appear {
-    opacity: 0.8;
-    transition: 0.1s;
-  }
-}
-
-#loading-img2 {
-  position: absolute;
-  opacity: 0;
-  top: 689px;
-  left: 308px;
-  transition: 0.3s;
-  pointer-events: none;
-
-  &.appear {
-    opacity: 1;
-    transition: 0.1s;
-  }
-}
-
-
-/* 比較ボタン */
+/* ------比較ボタン------ */
 #compare-btn {
-  font-family: "koruri";
   background: #fff;
   color: #1d313c;
-  border: 2px solid #1d313c;
-  border-radius: 26px;
+  border: 1px solid #1d313c;
+  border-radius: 8px;
+  font-size: 0.8em;
   transition: 0.3s;
-  box-sizing: border-box;
   display: block;
-  margin: 0 auto 14px;
-  text-align: center;
-  width: 150px;
-  height: 50px;
+  width: 30%;
+  padding: 12px;
+  margin: 12px auto 12px;
+  @include font-size5;
+  z-index: 999;
 
-  @include max(sm) {
-    height: 70px;
-    width: 350px;
-    font-size: 1.2em;
-  }
 
   @include touch-device-only {
     &:hover {

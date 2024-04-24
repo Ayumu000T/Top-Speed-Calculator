@@ -63,16 +63,12 @@
     //ローカルストレージに保存
     saveData() {
       const motoName = document.getElementById('moto-name').value.trim();
-      const balloon = document.getElementById('balloon');
 
       if (motoName !== '') {
         const motoToSave = this.inputMotoData();
         localStorage.setItem(motoName, JSON.stringify(motoToSave));
         this.addSavedData();
-        balloon.classList.add('appear');
-        setTimeout(() => {
-          balloon.classList.remove('appear');
-        }, 2500);
+        alert('保存済み数値"に保存されました')
       } else {
         alert('車名を入力してください');
       }
@@ -145,7 +141,8 @@
       this.calcBtn = document.getElementById('calc-btn');
       this.resetBtn = document.getElementById('reset-btn');
       this.targetTableId = this.calcBtn.getAttribute('data-target');
-      this.changeTarget()
+      this.changeTarget();
+      this.calcButonScroll();
     }
 
     //スプロケットの丁数
@@ -254,6 +251,15 @@
       this.otherRpmSetValue(-500, 'minus500', target);
       this.otherRpmSetValue(-1000, 'minus1000', target);
     }
+
+    //計算ボタンクリック後スクロール
+    calcButonScroll() {
+      if (this.targetTableId === 'table-result1') {
+        this.tableResult1.scrollIntoView({ behavior: 'smooth' });
+      } else if (this.targetTableId === 'table-result2') {
+        this.tableResult2.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   }
 
 
@@ -264,6 +270,7 @@
       this.resultSelect1 = document.getElementById('result-select1');
       this.resultSelect2 = document.getElementById('result-select2');
       this.resultReset2 = document.getElementById('result-reset2');
+      this.resultButtons2 = document.getElementById('result-buttons2');
       this.tableResult1 = document.getElementById('table-result1');
       this.tableResult2 = document.getElementById('table-result2');
       this.fukidashiResult1 = document.getElementById('fukidashi-result1');
@@ -272,6 +279,12 @@
       this.resultSelectMessage2 = document.getElementById('result-select-message2');
       this.compareOpen = document.getElementById('compare-open');
       this.compareClose = document.getElementById('compare-close');
+      this.tr1R = document.querySelectorAll('.tr1-r');
+      this.tr1Last = document.querySelector('.tr1-last');
+      this.tr2R = document.querySelectorAll('.tr2-r');
+      this.tr2Last = document.querySelector('.tr2-last');
+      this.resultDisplayTarget1 = document.getElementById('result-display-target1');
+      this.resultDisplayTarget2 = document.getElementById('result-display-target2');
     }
 
     //計算ボタンのターゲット変更(選択ボタン)
@@ -279,7 +292,17 @@
       this.calcBtn.setAttribute('data-target', 'table-result1');
       this.resultSelectMessage1.style.display = 'block';
       this.resultSelectMessage2.style.display = 'none';
+      this.resultDisplayTarget1.style.display = 'block';
+      this.resultDisplayTarget2.style.display = 'none';
       this.tableResult1.classList.add('select');
+      this.tr1R.forEach(element => {
+        element.classList.add('select');
+      });
+      this.tr2R.forEach(element => {
+        element.classList.remove('select');
+      });
+      this.tr1Last.classList.add('select');
+      this.tr2Last.classList.remove('select');
       this.tableResult2.classList.remove('select');
     }
     changeTarget2() {
@@ -288,6 +311,16 @@
       this.resultSelectMessage2.style.display = 'block';
       this.tableResult1.classList.remove('select');
       this.tableResult2.classList.add('select');
+      this.resultDisplayTarget1.style.display = 'none';
+      this.resultDisplayTarget2.style.display = 'block';
+      this.tr1R.forEach(element => {
+        element.classList.remove('select');
+      });
+      this.tr1Last.classList.remove('select');
+      this.tr2R.forEach(element => {
+        element.classList.add('select');
+      });
+      this.tr2Last.classList.add('select');
     }
 
     //計算結果リセットボタン
@@ -307,12 +340,15 @@
       }
       const trElements = document.querySelectorAll(`.tr${target}`);
       trElements.forEach((tr) => {
-        tr.classList.remove('highlight');
+        tr.querySelectorAll('td, th').forEach((child) => {
+          child.classList.remove('highlight');
+        });
       });
     }
 
     //比較ボタン
     compareBtn() {
+
       const displayNone = {
         tableResult2: this.tableResult2,
         resultReset2: this.resultReset2,
@@ -321,31 +357,46 @@
       }
 
       const displayBlock = {
-        fukidashiResult1: this.fukidashiResult1,
         compareClose: this.compareClose,
         compareOpen: this.compareOpen,
+      }
+
+      const displayFlex = {
+        resultButtons2: this.resultButtons2,
       }
 
       Object.entries(displayNone).forEach(([elementName, element]) => {
         const computedStyle = getComputedStyle(element).display;
         element.style.display = computedStyle === 'none' ? 'block' : 'none';
       });
+
       Object.entries(displayBlock).forEach(([elementName, element]) => {
         const computedStyle = getComputedStyle(element).display;
         element.style.display = computedStyle === 'block' ? 'none' : 'block';
       });
 
+      Object.entries(displayFlex).forEach(([elementName, element]) => {
+        const computedStyle = getComputedStyle(element).display;
+        element.style.display = computedStyle === 'none' ? 'flex' : 'none';
+      });
+
       if (this.tableResult2.style.display === 'block') {
         this.changeTarget2();
-        this.tableResult1.scrollIntoView({ behavior: 'smooth' });
+        this.tableResult2.scrollIntoView({ behavior: 'smooth' });
         this.resultSelect1.disabled = false;
         resultSelect1.classList.remove('is-inactive');
       } else if (this.tableResult2.style.display === 'none') {
         this.changeTarget1();
         this.resultSelectMessage1.style.display = 'none';
         this.tableResult1.classList.remove('select');
+        this.tr1R.forEach(element => {
+          element.classList.remove('select');
+        });
+        this.tr1Last.classList.remove('select');
         this.resultSelect1.disabled = true;
         resultSelect1.classList.add('is-inactive');
+        this.resultDisplayTarget1.style.display = 'none';
+        this.resultDisplayTarget2.style.display = 'none';
       }
     }
   }
@@ -362,12 +413,17 @@
     highlight() {
       this.trElements1.forEach((tr1) => {
         tr1.addEventListener('click', () => {
-          tr1.classList.toggle('highlight');
+          tr1.querySelectorAll('td, th').forEach((child) => {
+            child.classList.toggle('highlight');
+          });
         });
       });
+
       this.trElements2.forEach((tr2) => {
         tr2.addEventListener('click', () => {
-          tr2.classList.toggle('highlight');
+          tr2.querySelectorAll('td, th').forEach((child) => {
+            child.classList.toggle('highlight');
+          });
         });
       });
     }
@@ -430,10 +486,13 @@
     compareClose: 'compare-close',
     calcBtn: 'calc-btn',
     resetBtn: 'reset-btn',
+    resultButtons2: 'result-buttons2',
+    resultDisplayTarget1: 'result-display-target1',
+    resultDisplayTarget2: 'result-display-target2',
   };
 
   const compareBtn = document.getElementById(tableContents.compareBtn);
-  const table = document.getElementById(tableContents.table);
+  // const table = document.getElementById(tableContents.table);
   const tableResult2 = document.getElementById(tableContents.tableResult2);
   const resultSelect1 = document.getElementById(tableContents.resultSelect1);
   const resultSelect2 = document.getElementById(tableContents.resultSelect2);
@@ -449,6 +508,9 @@
   const compareClose = document.getElementById(tableContents.compareClose);
   const whiteLoading2 = document.getElementById(tableContents.whiteLoading2);
   const loadingImg2 = document.getElementById(tableContents.loadingImg2);
+  const resultButtons2 = document.getElementById(tableContents.resultButtons2);
+  const resultDisplayTarget1 = document.getElementById(tableContents.resultDisplayTarget1);
+  const resultDisplayTarget2 = document.getElementById(tableContents.resultDisplayTarget2);
 
 
   //初期表示設定(非表示)
@@ -457,11 +519,14 @@
     resultSelect2,
     resultReset2,
     fukidashiResult2,
+    resultButtons2,
     resultSelectMessage1,
     resultSelectMessage2,
     whiteLoading2,
     loadingImg2,
     compareClose,
+    resultDisplayTarget1,
+    resultDisplayTarget2,
   ];
   hidden.forEach(element => {
     element.style.display = 'none';
@@ -470,7 +535,7 @@
   //初期表示設定(表示)
   const displayed = [
     fukidashiResult1,
-    compareOpen
+    compareOpen,
   ];
   displayed.forEach(element => {
     element.style.display = 'block';
@@ -483,9 +548,10 @@
   calcBtn.addEventListener('click', () => {
     new CalcTopSpeed();
     new Animation();
-    table.scrollIntoView({ behavior: 'smooth' });
   });
   resetBtn.addEventListener('click', () => {
+    const form = document.getElementById('calc');
+    form.reset();
     new Update();
   });
   /*----------------------------計算結果---------------------------------- */
@@ -513,5 +579,4 @@
   compareBtn.addEventListener('click', () => {
     buttons.compareBtn();
   });
-
 }

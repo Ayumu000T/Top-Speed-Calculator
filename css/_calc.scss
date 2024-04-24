@@ -1,66 +1,53 @@
 @use '_mediaQuery' as *;
 
-/* 数値入力部分 */
+.fukidashi-3 {
+  display: none;
 
-.container {
-  width: 900px;
-  margin: 400px auto 32px;
-  background: #fadac1;
-  border-radius: 16px;
-  border: 8px solid #1d313c;
-  border-radius: 16px;
-  box-shadow: #222 16px 16px;
-  position: relative;
-
-  @include max(sm) {
-    margin-top: 450px;
+  @include min(sm) {
+    display: block;
   }
 }
 
-//ローカルストレージ操作
+.fukidashi-3-sp {
+  @include min(sm) {
+    display: none;
+  }
+}
+
 .localStorage {
-  z-index: 1;
-  position: absolute;
-  top: 162px;
-  left: 440px;
-
-  @include max(sm) {
-    left: 60px;
-  }
-
-
-  select {
-    width: 185px;
-
-    @include max(sm) {
-      font-size: 1.2em;
-      width: 390px;
-    }
-  }
+  @include margin-t;
+  width: 92%;
+  font-size: 0.5em;
+  margin-top: 8%;
 
   label {
-    font-size: 0.9em;
+    @include font-size2;
+  }
 
-    @include max(sm) {
-      font-size: 1.2em;
+  @include min(sm) {
+    font-size: 1em;
+  }
+
+  .select {
+    width: 40%;
+    height: 16px;
+    @include font-size2;
+
+    @include min(sm) {
+      height: 20px;
     }
+  }
+
+  .button-storage {
+    border: 1px solid #1d313c;
+    border-radius: 4px;
+    transition: 0.3s;
+    cursor: pointer;
+    @include font-size2;
   }
 
   #load {
-    border: 2px solid #1d313c;
     background: #e77843;
-    color: #fff;
-    transition: 0.3s;
-    cursor: pointer;
-
-    @include max(sm) {
-      height: 36px;
-      width: 120px;
-      font-size: 1em;
-      margin-left: 8px;
-      height: 60px;
-      border-radius: 8px;
-    }
 
     @include touch-device-only {
       &:hover {
@@ -76,20 +63,7 @@
   }
 
   #delete {
-    border: 2px solid #1d313c;
     background: #c43b39;
-    color: #fff;
-    transition: 0.3s;
-    cursor: pointer;
-
-    @include max(sm) {
-      height: 36px;
-      width: 120px;
-      font-size: 1em;
-      margin-left: 8px;
-      height: 60px;
-      border-radius: 8px;
-    }
 
     @include touch-device-only {
       &:hover {
@@ -104,363 +78,121 @@
   }
 }
 
-//計算機数値入力
 #calc {
 
-  .fukidashi-3 {
-    display: block;
-    margin: 32px auto 0;
-    position: relative;
+  width: 95%;
+  margin: 0 auto;
 
-    @include max(sm) {
-      display: none;
-    }
-  }
+  label {
 
-  .fukidashi-3-sp {
-    display: none;
-
-    @include max(sm) {
-      display: block;
-      margin: 32px auto 0;
-      position: relative;
-    }
-  }
-
-  .calc-inputs {
-
-    h2 {
-      color: #fff;
-      position: absolute;
-      top: 80px;
-      left: 60px;
-
-      @include max(sm) {
-        font-size: 1.8em;
-      }
-    }
-
-    input {
-      border: 2px solid #1d313c;
-      width: 80px;
-
-      @include max(sm) {
-        height: 48px;
-        width: 770px;
-      }
-    }
-
-    input[type="text"] {
-
-      @include max(sm) {
-        font-size: 140%;
-      }
-    }
-
-    .message-hankaku {
-      position: absolute;
-      top: 210px;
-      left: 60px;
-
-      @include max(sm) {
-        top: 220px;
-      }
-
-      p {
-        font-size: 0.8em;
-      }
-    }
-
-    .input-moto-name {
-      font-size: 1.1em;
-      position: absolute;
-      top: 160px;
-      left: 60px;
-      display: flex;
-
-      @include max(sm) {
-        flex-direction: column;
-        top: 250px;
-      }
-
-      label {
-
-        @include max(sm) {
-          font-size: 1.2em;
-        }
-      }
-
-      input {
-        width: 280px;
-
-        @include max(sm) {
-          width: 770px;
-        }
-      }
-    }
-
-    //rpm減速比
-    .input-top {
-      position: absolute;
-      top: 225px;
-      left: 45px;
-      display: flex;
-      justify-content: space-between;
-      margin: 16px;
-
-      @include max(sm) {
-        top: 350px;
-        flex-direction: column;
-      }
-
-      input {
-        width: 155px;
-
-        @include max(sm) {
-          width: 770px;
-        }
-      }
-
-      label {
-
-        @include max(sm) {
-          font-size: 1.2em;
-        }
-      }
-
-      .input-rpm {
-        margin-top: 0;
-
-        @include max(sm) {
-          flex-direction: column;
-        }
-      }
-
-      .input-primary {
-        margin-top: 8px;
-
-        .primary {
-          margin-right: 76px;
-        }
-
-        .secondary-outer {
-          margin-top: 8px;
-
-          .secondary {
-            margin-right: 76px;
-          }
-        }
-      }
-
-      //スプロケット
-      .input-sprockets {
-        border: 5px solid #1d313c;
-        padding: 12px;
-        margin-top: 6px;
-        width: 365px;
-        position: relative;
-        left: 55px;
-        top: -10px;
-
-        @include max(sm) {
-          position: static;
-          border: none;
-          padding: 0;
-          margin-top: 30px;
-        }
-
-        input {
-          width: 100px;
-
-          @include max(sm) {
-            width: 770px;
-          }
-        }
-
-        h3 {
-          display: none;
-
-          @include max(sm) {
-            display: block;
-          }
-        }
-
-        &::before {
-          background: #fff;
-          content: "スプロケットの丁数";
-          padding: 2px 4px;
-          position: absolute;
-          top: -16px;
-          left: 110px;
-
-          @include max(sm) {
-            display: none;
-          }
-        }
-
-        p {
-          margin: 0 0 0 16px;
-          font-size: 0.7em;
-
-          @include max(sm) {
-            margin: 0;
-          }
-        }
-
-        #sprocketF,
-        #sprocketR {
-          margin-top: 8px;
-
-          @include max(sm) {
-            margin-top: 0;
-          }
-
-        }
-
-        .sprocketF {
-          margin-left: 16px;
-
-          @include max(sm) {
-            margin: 0;
-          }
-        }
-      }
-    }
-
-
-    //タイヤサイズ
-    .tire-size {
-      margin-left: 0;
-      position: absolute;
-      top: 345px;
-      left: 60px;
-
-      @include max(sm) {
-        top: 925px;
-      }
-
-      p {
-        font-size: 0.8em;
-        margin: 8px 0;
-      }
-
-      h2 {
-        @include max(sm) {
-          font-size: 1.2em;
-        }
-      }
-
-      .with-unit {
-        display: none;
-
-        @include max(sm) {
-          display: block;
-          font-size: 1.2em;
-        }
-      }
-
-      .without-unit {
-
-        @include max(sm) {
-          display: none;
-        }
-      }
-
-
-      .small-label {
-        font-size: 0.8em;
-
-        @include max(sm) {
-          display: none;
-        }
-      }
-    }
-
-    //減速比
-    .ratios {
-      margin: 0;
-      position: absolute;
-      top: 470px;
-      left: 60px;
-
-      @include max(sm) {
-        display: flex;
-        flex-direction: column;
-        top: 1285px;
-      }
-
-      label {
-        @include max(sm) {
-          font-size: 1.2em;
-        }
-      }
-
-
-      p {
-        font-size: 0.9em;
-        margin: 8px 0;
-      }
-    }
-
-
-    #result-display-target1 {
-      color: #c43b39;
-      position: absolute;
-      top: 565px;
-      left: 60px;
-      opacity: 0;
-
-      @include max(sm) {
-        top: 1870px;
-      }
-
-      &.appear {
-        opacity: 1;
-      }
-    }
-
-    #result-display-target2 {
-      color: #c43b39;
-      position: absolute;
-      top: 565px;
-      left: 60px;
-      opacity: 0;
-
-      @include max(sm) {
-        top: 1870px;
-      }
-
-      &.appear {
-        opacity: 1;
-      }
-    }
+    font-size: 1em;
+    @include font-size2;
+    padding: 0;
 
   }
 
+  h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.3em;
+    @include font-size;
+  }
 
-  //計算ボタンなど
+  .moto-name {
+    font-size: 1.45em;
+    @include font-size;
+  }
 
-  .buttons {
-    text-align: center;
-    margin-top: 6px;
+  p {
+    margin: 0;
+    padding: 0;
+    @include font-size3;
+  }
 
-    #calc-btn {
-      font-family: "koruri";
-      font-size: 1.2em;
-      background: #50a3ab;
-      color: #fff;
-      border: 2px solid #1d313c;
-      border-radius: 24px;
-      transition: 0.3s;
-      box-sizing: border-box;
-      width: 350px;
-      height: 50px;
+  input {
+    @include font-size2;
+    @include input;
+    padding: 0;
+  }
 
+  .input-moto-name,
+  .input-rpm,
+  .input-primary,
+  .input-sprockets,
+  .tire-size,
+  .ratios {
+    @include margin-y;
+  }
 
+  #result-display-target1,
+  #result-display-target2 {
+    color: #c43b39;
+    font-size: 1em;
+    @include font-size2;
+  }
+}
 
-      @include max(sm) {
-        height: 100px;
-        font-size: 1.6em;
+.buttons {
+  text-align: center;
+  font-size: 0.7em;
+
+  .buttons-calc {
+    border: 1px solid #1d313c;
+    border-radius: 12px;
+    transition: 0.3s;
+    box-sizing: border-box;
+    width: 40%;
+    height: 40px;
+
+    @include min(sm) {
+      flex-direction: row;
+      gap: 8px;
+      width: 41%;
+    }
+  }
+
+  #calc-btn {
+    background: #50a3ab;
+
+    @include touch-device-only {
+      &:hover {
+        background: #1d313c;
+        cursor: pointer;
+      }
+    }
+
+    &:active {
+      opacity: 0.8;
+      transition: 0.1s;
+    }
+
+    &.is-inactive {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    &.is-active {
+      pointer-events: auto;
+      cursor: pointer;
+    }
+  }
+
+  .buttons-bottom {
+    display: flex;
+    flex-direction: column;
+
+    @include min(sm) {
+      flex-direction: row;
+      gap: 8px;
+    }
+
+    #reset-btn {
+      background: #c43b39;
+      margin: 8px auto 0;
+
+      @include min(sm) {
+        margin: 8px 0 0 auto;
+        width: 20%;
       }
 
       @include touch-device-only {
@@ -474,173 +206,29 @@
         opacity: 0.8;
         transition: 0.1s;
       }
-
-      &.is-inactive {
-        pointer-events: none;
-        opacity: 0.7;
-      }
-
-      &.is-active {
-        pointer-events: auto;
-        cursor: pointer;
-      }
     }
 
-    .buttons-bottom {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
+    #save-btn {
+      background: #e77843;
+      margin: 8px auto 0;
+      order: -1;
 
-      @include max(sm) {
-        flex-direction: column;
+      @include min(sm) {
+        margin: 8px auto 0 0;
+        width: 20%;
+        order: 1;
       }
 
-      #reset-btn {
-        font-family: "koruri";
-        font-size: 1em;
-        border: 2px solid #1d313c;
-        border-radius: 24px;
-        color: #fff;
-        background: #c43b39;
-        cursor: pointer;
-        transition: 0.3s;
-        box-sizing: border-box;
-        width: 170px;
-        height: 40px;
-
-        @include max(sm) {
-          margin: 16px auto 0;
-          height: 100px;
-          width: 350px;
-          font-size: 1.5em;
-        }
-
-        @include touch-device-only {
-          &:hover {
-            background: #1d313c;
-            cursor: pointer;
-          }
-        }
-
-        &:active {
-          opacity: 0.8;
-          transition: 0.1s;
+      @include touch-device-only {
+        &:hover {
+          background: #1d313c;
+          cursor: pointer;
         }
       }
 
-      #save-btn {
-        font-family: "koruri";
-        font-size: 1em;
-        border: 2px solid #1d313c;
-        border-radius: 24px;
-        color: #fff;
-        background: #e77843;
-        cursor: pointer;
-        transition: 0.3s;
-        box-sizing: border-box;
-        width: 170px;
-        height: 40px;
-
-        @include max(sm) {
-          margin: 16px auto 0;
-          height: 100px;
-          width: 350px;
-          order: -1;
-          font-size: 1.5em;
-        }
-
-        @include touch-device-only {
-          &:hover {
-            background: #1d313c;
-            cursor: pointer;
-          }
-        }
-
-        &:active {
-          opacity: 0.8;
-          transition: 0.1s;
-        }
-      }
-    }
-  }
-
-  /* ------保存しましたメッセージ------ */
-  #balloon {
-    position: absolute;
-    top: 790px;
-    left: 455px;
-    opacity: 0;
-    transition: 0.3s;
-    pointer-events: none;
-    z-index: 2;
-
-    @include max(sm) {
-      top: 2050px;
-      left: 293px;
-    }
-
-    &.appear {
-      opacity: 1;
-    }
-
-    .balloon {
-      position: relative;
-      display: inline-block;
-      margin: 1.5em 0;
-      padding: 7px 10px;
-      min-width: 120px;
-      max-width: 100%;
-      color: #1d313c;
-      font-size: 1em;
-      background: #fff;
-      border: solid 3px #1d313c;
-      border-radius: 18px;
-      box-sizing: border-box;
-
-      @include max(sm) {
-        padding: 30px 30px;
-        font-size: 1.3em;
-      }
-
-      &:before {
-        content: "";
-        position: absolute;
-        top: -20px;
-        left: 50%;
-        margin-left: -15px;
-        border: 10px solid transparent;
-        border-bottom: 10px solid #fff;
-        z-index: 2;
-
-        @include max(sm) {
-          border-top: 10px solid #fff;
-          top: 84px;
-          border-bottom: none;
-        }
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: -26px;
-        left: 50%;
-        margin-left: -17px;
-        border: 12px solid transparent;
-        border-bottom: 12px solid #1d313c;
-        z-index: 1;
-
-        @include max(sm) {
-          border-top: 12px solid #1d313c;
-          top: 88px;
-          border-bottom: none;
-        }
-      }
-
-      p {
-        margin: 0;
-        padding: 0;
-        font-size: 0.8em;
+      &:active {
+        opacity: 0.8;
+        transition: 0.1s;
       }
     }
   }

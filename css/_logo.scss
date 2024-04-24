@@ -1,3 +1,5 @@
+@use '_mediaQuery' as *;
+
 @font-face {
   font-family: "koruri";
   src: url("../font/Koruri-Bold.ttf") format("truetype");
@@ -16,88 +18,148 @@ img {
   pointer-events: none;
 }
 
-.wrapper {
-  width: 900px;
-  margin: 0 auto;
-}
-
 h2 {
-  margin: 0;
-  /* font-size: 1.4em; */
-  font-weight: normal;
+  color: #fff;
 }
 
-h3 {
-  margin: 0;
-  font-weight: normal;
+button {
+  color: #fff;
 }
 
-p {
-  font-weight: normal;
-  margin: 0;
-}
 
 /* ----------タイトルバー----------- */
+
+.wrapper {
+  max-width: 900px;
+  margin: 32px auto;
+  background: #fadac1;
+  border: 4px solid #1d313c;
+  border-top: 18px solid #1d313c;
+  border-radius: 16px;
+  border-radius: 16px;
+  box-shadow: #222 16px 16px;
+
+  @include min(sm) {
+    border: 8px solid #1d313c;
+    border-top: 28px solid #1d313c;
+  }
+
+  @include min(md) {
+    border-top: 32px solid #1d313c;
+  }
+}
+
+
+
 .title-bar {
-  border-top: 24px solid #1d313c;
+  position: relative;
+
+  .sprocket {
+    width: 12px;
+    height: auto;
+    top: -14px;
+
+    @include min(sm) {
+      width: 18px;
+      top: -21px;
+    }
+
+    @include min(md) {
+      width: 20px;
+      top: -24px;
+    }
+  }
 
   .sprocket1 {
     position: absolute;
-    top: 0;
-    left: 4px;
+    left: -2%;
+
+    @include min(md) {
+      left: 0%;
+    }
   }
 
   .sprocket2 {
     position: absolute;
-    top: 0;
-    left: 26px;
+    left: 4%;
+
   }
 
   .sprocket3 {
     position: absolute;
-    top: 0;
-    left: 48px;
+    left: 10%;
+
+    @include min(md) {
+      left: 8%;
+    }
   }
 
   .sprocket4 {
     position: absolute;
-    top: 0;
-    left: 880px;
+    left: 97%;
   }
 }
 
-.sprocket4-ex {
+.sprocket2-ex {
   position: absolute;
-  top: 0;
-  left: 530px;
+  left: 4%;
+
+  @include min(md) {
+    left: 6%;
+  }
+}
+
+.sprocket3-ex {
+  position: absolute;
+  left: 10%;
+
+  @include min(md) {
+    left: 12%;
+  }
+}
+
+.sprocket1-hel {
+  position: absolute;
+  left: -2%;
+}
+
+.sprocket2-hel {
+  position: absolute;
+  left: 10%;
+}
+
+.sprocket3-hel {
+  position: absolute;
+  left: 24%;
 }
 
 .sprocket4-hel {
   position: absolute;
-  top: 0;
-  left: 285px;
+  left: 95%;
 }
 
 /* ----------ロゴ----------- */
 
 .logo {
-  margin: 32px auto;
-  background: #fadac1;
-  width: 900px;
-  border: 8px solid #1d313c;
-  border-radius: 16px;
-  box-shadow: #222 16px 16px;
-  position: relative;
 
   h1 {
-    margin: 0;
+    @include min(sm) {
+      margin: 32px 0;
+    }
 
     img {
       display: block;
-      margin: 32px auto;
       background: #fff;
-      border: 8px solid #1d313c;
+      border: 4px solid #1d313c;
       padding: 16px 0;
+
+      @include min(sm) {
+        border: 6px solid #1d313c;
+      }
+
+      @include min(md) {
+        border: 8px solid #1d313c;
+      }
     }
   }
 }
