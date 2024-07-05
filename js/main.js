@@ -1,11 +1,11 @@
 "use strict";
 
-import { Update } from './class/_Update.js';
-import { MotoData } from './class/_MotoData.js';
-import { CalcTopSpeed } from './class/_CalcTopSpeed.js';
-import { Buttons } from './class/_Buttons.js';
-import { Highlight } from './class/_Highlight.js';
-import { Animation } from './class/_Animation.js';
+import { Update } from './class/Update.js';
+import { MotoData } from './class/MotoData.js';
+import { CalcTopSpeed } from './class/CalcTopSpeed.js';
+import { Buttons } from './class/Buttons.js';
+import { Highlight } from './class/Highlight.js';
+import { Animation } from './class/Animation.js';
 
 {
   // ID

@@ -1,4 +1,4 @@
-import { Update } from './_Update.js';
+import { Update } from './Update.js';
 
 const updateInstance = new Update();
 
